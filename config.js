@@ -21,14 +21,14 @@ global.APIKeys = {
 
 // Other
 apikey: "bf2d2cf29b3edc604b447983",
-global.ownername = 'sid bhai'
-global.owner = ['919142294671']
-global.premium = ['919142294671']
-global.packname = 'gss botwa'
-global.author = 'gss botwa'
+global.ownername = 'emdi'
+global.owner = ['918157993101']
+global.premium = ['918157993101']
+global.packname = 'ebhi botwa'
+global.author = 'ebhi botwa'
 global.sessionName = 'session'
 global.prefa = ['','!','.',]
-global.sp = '✪'
+global.sp = '😑'
 global.mess = {
     success: '✓ Success',
     admin: 'Tʜɪs ꜰᴇᴀᴛᴜʀᴇ ɪs ᴏɴʟʏ ꜰᴏʀ ɢʀᴏᴜᴘ ᴀᴅᴍɪɴs',
