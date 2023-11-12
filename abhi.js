@@ -46,7 +46,7 @@ let ANTICALL_MODE = false; // added
 
 const reportedMessages = {};
 
-module.exports = gss = async (gss, m, chatUpdate, store) => {
+module.exports = abhi = async (abhi, m, chatUpdate, store) => {
     try {
         var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
         var budy = (typeof m.text == 'string' ? m.text : '')
@@ -57,7 +57,7 @@ module.exports = gss = async (gss, m, chatUpdate, store) => {
         var args = body.trim().split(/ +/).slice(1)
         args = args.concat(['','','','','',''])
         const pushname = m.pushName || "No Name"
-        const botNumber = await gss.decodeJid(gss.user.id)
+        const botNumber = await abhi.decodeJid(abhi.user.id)
         const isCreator = [botNumber, ...global.owner].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
         const itsMe = m.sender == botNumber ? true : false
         const text = q = args.join(" ").trim()
@@ -67,18 +67,18 @@ module.exports = gss = async (gss, m, chatUpdate, store) => {
         const qmsg = (quoted.msg || quoted)
         const isMedia = /image|video|sticker|audio/.test(mime)
 	
-	const botname = "𝐆𝐒𝐒_𝚩𝚯𝚻𝐖𝚫";
-	const devlopernumber = "919142294671";
+	const botname = "test";
+	const devlopernumber = "919074692450";
 	
         // Group
-        const groupMetadata = m.isGroup ? await gss.groupMetadata(m.chat).catch(e => {}) : ''
+        const groupMetadata = m.isGroup ? await abhi.groupMetadata(m.chat).catch(e => {}) : ''
         const groupName = m.isGroup ? groupMetadata.subject : ''
         const participants = m.isGroup ? await groupMetadata.participants : ''
         const groupAdmins = m.isGroup ? await getGroupAdmins(participants) : ''
 	const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
 	const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) : false
 	const isPremium = isCreator || global.premium.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender) || false
-const Badgss = JSON.parse(fs.readFileSync('./database/bad.json'))
+const Badabhi = JSON.parse(fs.readFileSync('./database/bad.json'))
         const antiToxic = m.isGroup ? nttoxic.includes(m.sender) : false
           const messagesD = body.slice(0).trim().split(/ +/).shift().toLowerCase()
  
@@ -222,14 +222,14 @@ const reactionMessage = {
                 key: m.key
             }
         }
-        await gss.sendMessage(m.chat, reactionMessage);
+        await abhi.sendMessage(m.chat, reactionMessage);
         const successReactionMessage = {
             react: {
                 text: "💻",
                 key: m.key
             }
         }
-        await gss.sendMessage(m.chat, successReactionMessage); 
+        await abhi.sendMessage(m.chat, successReactionMessage); 
  
  m.reply(`
   - *ᴘ ɪ ɴ ɢ* - 
@@ -273,7 +273,7 @@ if (m.isBaileys && !m.key.fromMe) {
 if (!m.isCreator && !isGroupAdmins) {
 m.reply("\`\`\`「  BOTZ DETECTED  」\`\`\`")
 setTimeout(() => {
-gss.groupParticipantsUpdate(m.chat, [m.sender], "remove")
+abhi.groupParticipantsUpdate(m.chat, [m.sender], "remove")
 }, 2000)
 }}}
 
@@ -287,20 +287,20 @@ let ALWAYS_ONLINE = process.env.ALWAYS_ONLINE === 'true';
 
 if (TYPING_ENABLED && command) {
   // Execute code when REACODING is enabled
-  gss.sendPresenceUpdate('composing');
+  abhi.sendPresenceUpdate('composing');
 }
 
 if (AUTO_READ_ENABLED && command) {
   // Execute code when AUTO_READ is enabled
-  gss.readMessages([m.key]);
+  abhi.readMessages([m.key]);
 }
 
 if (ALWAYS_ONLINE) {
   // Execute code when ALWAYS_ONLINE is enabled
-  gss.sendPresenceUpdate('available', m.chat);
+  abhi.sendPresenceUpdate('available', m.chat);
 } else {
   // Execute code when ALWAYS_ONLINE is disabled
-  gss.sendPresenceUpdate('unavailable', m.chat);
+  abhi.sendPresenceUpdate('unavailable', m.chat);
 }
 
 	try {
@@ -346,7 +346,7 @@ if (!('autobio' in setting)) setting.autobio = false
         }
 	    
         // Public & Self
-        if (!gss.public) {
+        if (!abhi.public) {
             if (!m.key.fromMe) return
         }
 
@@ -368,7 +368,7 @@ if (!('autobio' in setting)) setting.autobio = false
 	    let setting = global.db.data.settings[botNumber]
 	    if (new Date() * 1 - setting.status > 1000) {
 		let uptime = await runtime(process.uptime())
-		await gss.updateProfileStatus(`${gss.user.name} | Runtime : ${runtime(uptime)}`)
+		await abhi.updateProfileStatus(`${abhi.user.name} | Runtime : ${runtime(uptime)}`)
 		setting.status = new Date() * 1
 	    }
 	}
@@ -378,13 +378,13 @@ if (!('autobio' in setting)) setting.autobio = false
         if (budy.match(`chat.whatsapp.com`)) {
         m.reply(`「 ANTI LINK 」\n\nYou were detected sending a group link, sorry, you will be kicked !`)
         if (!isBotAdmins) return m.reply(`Eh, the bot is not an admin `)
-        let gclink = (`https://chat.whatsapp.com/`+await gss.groupInviteCode(m.chat))
+        let gclink = (`https://chat.whatsapp.com/`+await abhi.groupInviteCode(m.chat))
         let isLinkThisGc = new RegExp(gclink, 'i')
         let isgclink = isLinkThisGc.test(m.text)
         if (isgclink) return m.reply(`Ehh, sorry it didn't happen, because you sent the link to this group`)
         if (isAdmins) return m.reply(`Ehh, sorry you are admin`)
         if (isCreator) return m.reply(`Hey, sorry, you're the owner of my bot`)
-        gss.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+        abhi.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
         }
         }
         
@@ -398,10 +398,10 @@ if (!('autobio' in setting)) setting.autobio = false
         let hash = global.db.data.sticker[m.msg.fileSha256.toString('base64')]
         let { text, mentionedJid } = hash
         let messages = await generateWAMessage(m.chat, { text: text, mentions: mentionedJid }, {
-            userJid: gss.user.id,
+            userJid: abhi.user.id,
             quoted: m.quoted && m.quoted.fakeObj
         })
-        messages.key.fromMe = areJidsSameUser(m.sender, gss.user.id)
+        messages.key.fromMe = areJidsSameUser(m.sender, abhi.user.id)
         messages.key.id = m.key.id
         messages.pushName = m.pushName
         if (m.isGroup) messages.participant = m.sender
@@ -410,7 +410,7 @@ if (!('autobio' in setting)) setting.autobio = false
             messages: [proto.WebMessageInfo.fromObject(messages)],
             type: 'append'
         }
-        gss.ev.emit('messages.upsert', msg)
+        abhi.ev.emit('messages.upsert', msg)
         }
   	    
 
@@ -473,8 +473,8 @@ ${isWin ? `@${winner.split('@')[0]} win!` : isTie ? `Game over` : `Turn ${['❌'
 Type *surrender* to give up and admit to Lostan`
 	    if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== m.chat)
 	    room[room.game._currentTurn ^ isSurrender ? 'x' : 'o'] = m.chat
-	    if (room.x !== room.o) await gss.sendText(room.x, str, m, { mentions: parseMention(str) } )
-	    await gss.sendText(room.o, str, m, { mentions: parseMention(str) } )
+	    if (room.x !== room.o) await abhi.sendText(room.x, str, m, { mentions: parseMention(str) } )
+	    await abhi.sendText(room.o, str, m, { mentions: parseMention(str) } )
 	    if (isTie || isWin) {
 	    delete this.game[room.id]
 	    }
@@ -482,7 +482,7 @@ Type *surrender* to give up and admit to Lostan`
 	    
         if (db.data.users[m.sender].afkTime > -1) {
             let user = global.db.data.users[m.sender]
-            gss.sendTextWithMentions(m.chat, `@${m.sender.split('@')[0]} stop AFK${user.afkReason ? ' setelah ' + user.afkReason : ''}
+            abhi.sendTextWithMentions(m.chat, `@${m.sender.split('@')[0]} stop AFK${user.afkReason ? ' setelah ' + user.afkReason : ''}
 during ${clockString(new Date - user.afkTime)}`)
             user.afkTime = -1
             user.afkReason = ''
@@ -534,7 +534,7 @@ if (!text) return m.reply(`Give Me a Series or movie Name`)
             imdbt += "🏙️Production : " + fids.data.Production + "\n"
             imdbt += "🌟imdbRating : " + fids.data.imdbRating + "\n"
             imdbt += "✅imdbVotes  : " + fids.data.imdbVotes + ""
-           gss.sendMessage(m.chat, {
+           abhi.sendMessage(m.chat, {
                 image: {
                     url: fids.data.Poster,
                 },
@@ -576,8 +576,8 @@ ${arr.slice(3, 6).join('')}
 ${arr.slice(6).join('')}
 
 Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and admit defeat`
-            if (room.x !== room.o) await gss.sendText(room.x, str, m, { mentions: parseMention(str) } )
-            await gss.sendText(room.o, str, m, { mentions: parseMention(str) } )
+            if (room.x !== room.o) await abhi.sendText(room.x, str, m, { mentions: parseMention(str) } )
+            await abhi.sendText(room.o, str, m, { mentions: parseMention(str) } )
             } else {
             room = {
             id: 'tictactoe-' + (+new Date),
@@ -606,13 +606,13 @@ Waiting @${room.game.currentTurn.split('@')[0]} Type *surrender* to give up and 
   if (!isUrl(args[0]) && !args[0].includes('whatsapp.com')) throw 'Invalid Link!';
   m.reply(mess.wait);
   let result = args[0].split('https://chat.whatsapp.com/')[1];
-  await gss.groupAcceptInvite(result).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
+  await abhi.groupAcceptInvite(result).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
 }
 break;
 
 case 'leave': {
   if (!isCreator) throw mess.owner;
-  await gss.groupLeave(m.chat).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
+  await abhi.groupLeave(m.chat).then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
 }
 break;
 
@@ -630,7 +630,7 @@ case 'promote': {
   if (!isBotAdmins) throw mess.botAdmin;
   if (!isAdmins) throw mess.admin;
   let users = m.mentionedJid[0] ? m.mentionedJid : m.quoted ? [m.quoted.sender] : [text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'];
-  await gss.groupParticipantsUpdate(m.chat, users, 'promote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
+  await abhi.groupParticipantsUpdate(m.chat, users, 'promote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
 }
 break;
 
@@ -640,7 +640,7 @@ case 'add': {
   if (!isBotAdmins) throw mess.botAdmin;
   if (!isAdmins) throw mess.admin;
   let users = m.mentionedJid[0] ? m.mentionedJid : m.quoted ? [m.quoted.sender] : [text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'];
-  await gss.groupParticipantsUpdate(m.chat, users, 'add').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
+  await abhi.groupParticipantsUpdate(m.chat, users, 'add').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
 }
 break;
 
@@ -649,7 +649,7 @@ break;
   if (!isBotAdmins) throw mess.botAdmin;
   if (!isAdmins) throw mess.admin;
   let users = m.mentionedJid[0] ? m.mentionedJid : m.quoted ? [m.quoted.sender] : [text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'];
-  await gss.groupParticipantsUpdate(m.chat, users, 'remove').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
+  await abhi.groupParticipantsUpdate(m.chat, users, 'remove').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
 }
 break;
 case 'demote': {
@@ -657,20 +657,20 @@ case 'demote': {
   if (!isBotAdmins) throw mess.botAdmin;
   if (!isAdmins) throw mess.admin;
   let users = m.mentionedJid[0] ? m.mentionedJid : m.quoted ? [m.quoted.sender] : [text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'];
-  await gss.groupParticipantsUpdate(m.chat, users, 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
+  await abhi.groupParticipantsUpdate(m.chat, users, 'demote').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
 }
 break;
 case 'block': {
   if (!isCreator) throw mess.owner;
   let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net';
-  await gss.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
+  await abhi.updateBlockStatus(users, 'block').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
 }
 break;
 
 case 'unblock': {
   if (!isCreator) throw mess.owner;
   let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net';
-  await gss.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
+  await abhi.updateBlockStatus(users, 'unblock').then((res) => m.reply(jsonformat(res))).catch((err) => m.reply(jsonformat(err)));
 }
 break;
 
@@ -679,7 +679,7 @@ case 'setname': case 'setsubject': {
   if (!isBotAdmins) throw mess.botAdmin;
   if (!isAdmins) throw mess.admin;
   if (!text) throw 'Text?';
-  await gss.groupUpdateSubject(m.chat, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)));
+  await abhi.groupUpdateSubject(m.chat, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)));
 }
 break;
 
@@ -688,7 +688,7 @@ case 'setdesc': case 'setdesk': {
   if (!isBotAdmins) throw mess.botAdmin;
   if (!isAdmins) throw mess.admin;
   if (!text) throw 'Text?';
-  await gss.groupUpdateDescription(m.chat, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)));
+  await abhi.groupUpdateDescription(m.chat, text).then((res) => m.reply(mess.success)).catch((err) => m.reply(jsonformat(err)));
 }
 break;
 
@@ -696,8 +696,8 @@ break;
   if (!isCreator) throw mess.owner;
   if (!/image/.test(mime)) throw `Send/Reply with an Image and Caption ${prefix + command}`;
   if (/webp/.test(mime)) throw `Send/Reply with an Image and Caption ${prefix + command}`;
-  let media = await gss.downloadAndSaveMediaMessage(qmsg);
-  await gss.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media));
+  let media = await abhi.downloadAndSaveMediaMessage(qmsg);
+  await abhi.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media));
   m.reply(mess.success);
 }
 break;
@@ -707,8 +707,8 @@ case 'setppgroup': case 'setppgrup': case 'setppgc': {
   if (!isAdmins) throw mess.admin;
   if (!/image/.test(mime)) throw `Send/Reply with an Image and Caption ${prefix + command}`;
   if (/webp/.test(mime)) throw `Send/Reply with an Image and Caption ${prefix + command}`;
-  let media = await gss.downloadAndSaveMediaMessage(qmsg);
-  await gss.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media));
+  let media = await abhi.downloadAndSaveMediaMessage(qmsg);
+  await abhi.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media));
   m.reply(mess.success);
 }
 break;
@@ -722,7 +722,7 @@ let teks = `乂  ᴀᴛᴛᴇɴᴛɪᴏɴ ᴇᴠᴇʀʏᴏɴᴇ 乂
 for (let mem of participants) {
 teks += `✪ @${mem.id.split('@')[0]}\n`
 }
-gss.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
+abhi.sendMessage(m.chat, { text: teks, mentions: participants.map(a => a.id) }, { quoted: m })
 }
 break;
 
@@ -730,7 +730,7 @@ case 'hidetag': {
   if (!m.isGroup) throw mess.group;
   if (!isBotAdmins) throw mess.botAdmin;
   if (!isAdmins) throw mess.admin;
-  gss.sendMessage(m.chat, { text: q ? q : '', mentions: participants.map(a => a.id) }, { quoted: m });
+  abhi.sendMessage(m.chat, { text: q ? q : '', mentions: participants.map(a => a.id) }, { quoted: m });
 }
 break;
 
@@ -739,7 +739,7 @@ case 'totag': {
   if (!isBotAdmins) throw mess.botAdmin;
   if (!isAdmins) throw mess.admin;
   if (!m.quoted) throw `Reply to a message with the command ${prefix + command}`;
-  gss.sendMessage(m.chat, { forward: m.quoted.fakeObj, mentions: participants.map(a => a.id) });
+  abhi.sendMessage(m.chat, { forward: m.quoted.fakeObj, mentions: participants.map(a => a.id) });
 }
 break;
 
@@ -748,9 +748,9 @@ break;
   db.data.users[m.sender].limit -= 1; // Decrease the limit by 1
   let { styletext } = require('./lib/scraper');
   if (!text) throw 'Enter the text query!';
-  let anu = await styletext(text);
+  let abhi = await styletext(text);
   let teks = `Style Text From ${text}\n\n`;
-  for (let i of anu) {
+  for (let i of abhi) {
     teks += `⭔ *${i.name}* : ${i.result}\n\n`;
   }
   m.reply(teks);
@@ -762,11 +762,11 @@ case 'group': case 'grup': {
   if (!isBotAdmins) throw mess.botAdmin;
   if (!isAdmins) throw mess.admin;
   if (args[0].toLowerCase() === 'close') {
-    await gss.groupSettingUpdate(m.chat, 'announcement').then((res) => m.reply(`Successfully Closed the Group`)).catch((err) => m.reply(jsonformat(err)));
+    await abhi.groupSettingUpdate(m.chat, 'announcement').then((res) => m.reply(`Successfully Closed the Group`)).catch((err) => m.reply(jsonformat(err)));
   } else if (args[0].toLowerCase() === 'open') {
-    await gss.groupSettingUpdate(m.chat, 'not_announcement').then((res) => m.reply(`Successfully Opened the Group`)).catch((err) => m.reply(jsonformat(err)));
+    await abhi.groupSettingUpdate(m.chat, 'not_announcement').then((res) => m.reply(`Successfully Opened the Group`)).catch((err) => m.reply(jsonformat(err)));
   } else {
-    gss.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} Open`, `${command.charAt(0).toUpperCase() + command.slice(1)} Close`]);
+    abhi.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} Open`, `${command.charAt(0).toUpperCase() + command.slice(1)} Close`]);
   }
 }
 break;
@@ -776,11 +776,11 @@ case 'editinfo': {
   if (!isBotAdmins) throw mess.botAdmin;
   if (!isAdmins) throw mess.admin;
   if (args[0].toLowerCase() === 'open') {
-    await gss.groupSettingUpdate(m.chat, 'unlocked').then((res) => m.reply(`Successfully Opened Group Edit Info`)).catch((err) => m.reply(jsonformat(err)));
+    await abhi.groupSettingUpdate(m.chat, 'unlocked').then((res) => m.reply(`Successfully Opened Group Edit Info`)).catch((err) => m.reply(jsonformat(err)));
   } else if (args[0].toLowerCase() === 'close') {
-    await gss.groupSettingUpdate(m.chat, 'locked').then((res) => m.reply(`Successfully Closed Group Edit Info`)).catch((err) => m.reply(jsonformat(err)));
+    await abhi.groupSettingUpdate(m.chat, 'locked').then((res) => m.reply(`Successfully Closed Group Edit Info`)).catch((err) => m.reply(jsonformat(err)));
   } else {
-    gss.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} Open`, `${command.charAt(0).toUpperCase() + command.slice(1)} Close`]);
+    abhi.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} Open`, `${command.charAt(0).toUpperCase() + command.slice(1)} Close`]);
   }
 }
 break;
@@ -798,7 +798,7 @@ break;
     db.data.chats[m.chat].antilink = false;
     m.reply(`Antilink Deactivated!`);
   } else {
-    gss.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} On`, `${command.charAt(0).toUpperCase() + command.slice(1)} Off`]);
+    abhi.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} On`, `${command.charAt(0).toUpperCase() + command.slice(1)} Off`]);
   }
 }
 break;
@@ -810,13 +810,13 @@ case 'mute': {
   if (args[0].toLowerCase() === "on") {
     if (db.data.chats[m.chat].mute) return m.reply(`Already Active Before`);
     db.data.chats[m.chat].mute = true;
-    m.reply(`${gss.user.name} has been muted in this group!`);
+    m.reply(`${abhi.user.name} has been muted in this group!`);
   } else if (args[0].toLowerCase() === "off") {
     if (!db.data.chats[m.chat].mute) return m.reply(`Already Inactive Before`);
     db.data.chats[m.chat].mute = false;
-    m.reply(`${gss.user.name} has been unmuted in this group!`);
+    m.reply(`${abhi.user.name} has been unmuted in this group!`);
   } else {
-    gss.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} On`, `${command.charAt(0).toUpperCase() + command.slice(1)} Off`]);
+    abhi.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} On`, `${command.charAt(0).toUpperCase() + command.slice(1)} Off`]);
   }
 }
 break;
@@ -824,22 +824,22 @@ break;
 case 'linkgroup': case 'linkgc': {
   if (!m.isGroup) throw mess.group;
   if (!isBotAdmins) throw mess.botAdmin;
-  let response = await gss.groupInviteCode(m.chat);
-  gss.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nGroup Link: ${groupMetadata.subject}`, m, { detectLink: true });
+  let response = await abhi.groupInviteCode(m.chat);
+  abhi.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nGroup Link: ${groupMetadata.subject}`, m, { detectLink: true });
 }
 break;
 
             
             case 'setnamabot': case 'setnamebot': {
   if (!text) throw `Example: ${prefix + command} WhatsApp ✅`;
-  let name = await gss.updateProfileName(text);
+  let name = await abhi.updateProfileName(text);
   m.reply(`Successfully renamed bot to ${name}`);
 }
 break;
 
 case 'setstatus': case 'setbiobot': case 'setbotbio': {
-  if (!text) throw `This is a WhatsApp Bot named gss botwa`;
-  let name = await gss.updateProfileStatus(text);
+  if (!text) throw `This is a WhatsApp Bot named abhi botwa`;
+  let name = await abhi.updateProfileStatus(text);
   m.reply(`Successfully changed bot bio status to ${name}`);
 }
 break;
@@ -856,7 +856,7 @@ case 'anticall': {
     ciko = false;
     m.reply(`AntiCall Deactivated!`);
   } else {
-    gss.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} On`, `${command.charAt(0).toUpperCase() + command.slice(1)} Off`]);
+    abhi.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} On`, `${command.charAt(0).toUpperCase() + command.slice(1)} Off`]);
   }
 }
 break;
@@ -865,34 +865,34 @@ break;
   if (!m.quoted) throw false;
   let { chat, fromMe, id, isBaileys } = m.quoted;
   if (!isBaileys) throw 'The message is not sent by the bot!';
-  gss.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } });
+  abhi.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } });
 }
 break;
 
 case 'bcgc': case 'bcgroup': {
   if (!isCreator) throw mess.owner;
   if (!text) throw `Where's the text?\n\nExample: ${prefix + command} fatih-san`;
-  let getGroups = await gss.groupFetchAllParticipating();
+  let getGroups = await abhi.groupFetchAllParticipating();
   let groups = Object.entries(getGroups).slice(0).map(entry => entry[1]);
-  let anu = groups.map(v => v.id);
-  m.reply(`Sending Broadcast to ${anu.length} Group Chats, Estimated Time ${anu.length * 1.5} seconds`);
-  for (let i of anu) {
+  let abhi = groups.map(v => v.id);
+  m.reply(`Sending Broadcast to ${abhi.length} Group Chats, Estimated Time ${abhi.length * 1.5} seconds`);
+  for (let i of abhi) {
     await sleep(1500);
     let txt = `「 Bot Broadcast 」\n\n${text}`;
-    gss.sendText(i, txt);
+    abhi.sendText(i, txt);
   }
-  m.reply(`Successfully Sent Broadcast to ${anu.length} Groups`);
+  m.reply(`Successfully Sent Broadcast to ${abhi.length} Groups`);
 }
 break;
 
 case 'bc': case 'broadcast': case 'bcall': {
   if (!isCreator) throw mess.owner;
   if (!text) throw `Where's the text?\n\nExample: ${prefix + command} fatih-san`;
-  let anu = await store.chats.all().map(v => v.id);
-  m.reply(`Sending Broadcast to ${anu.length} Chats\nEstimated Time ${anu.length * 1.5} seconds`);
-  for (let yoi of anu) {
+  let abhi = await store.chats.all().map(v => v.id);
+  m.reply(`Sending Broadcast to ${abhi.length} Chats\nEstimated Time ${abhi.length * 1.5} seconds`);
+  for (let yoi of abhi) {
     await sleep(1500);
-    gss.sendText(yoi, txt);
+    abhi.sendText(yoi, txt);
   }
   m.reply('Broadcast Successful');
 }
@@ -910,44 +910,44 @@ case 'infochat': {
     teks += `⭔ @${i.userJid.split('@')[0]}\n`;
     teks += ` ┗━⭔ *Time:* ${moment(Time * 1000).format('DD/MM/YY HH:mm:ss')} ⭔ *Status:* ${read ? 'Read' : 'Sent'}\n\n`;
   }
-  gss.sendTextWithMentions(m.chat, teks, m);
+  abhi.sendTextWithMentions(m.chat, teks, m);
 }
 break;
 
 case 'q': case 'quoted': {
   if (!m.quoted) return m.reply('Reply to the message!');
-  let wokwol = await gss.serializeM(await m.getQuotedObj());
+  let wokwol = await abhi.serializeM(await m.getQuotedObj());
   if (!wokwol.quoted) return m.reply('The replied message does not contain a reply');
   await wokwol.quoted.copyNForward(m.chat, true);
 }
 break;
 
             case 'listpc': {
-  let anu = await store.chats.all().filter(v => v.id.endsWith('.net')).map(v => v.id);
-  let teks = `⬣ *LIST PERSONAL CHAT*\n\nTotal Chats: ${anu.length} Chats\n\n`;
-  for (let i of anu) {
+  let abhi = await store.chats.all().filter(v => v.id.endsWith('.net')).map(v => v.id);
+  let teks = `⬣ *LIST PERSONAL CHAT*\n\nTotal Chats: ${abhi.length} Chats\n\n`;
+  for (let i of abhi) {
     let nama = store.messages[i].array[0].pushName;
     teks += `⬡ *Name:* ${nama}\n⬡ *User:* @${i.split('@')[0]}\n⬡ *Chat:* https://wa.me/${i.split('@')[0]}\n\n────────────────────────\n\n`;
   }
-  gss.sendTextWithMentions(m.chat, teks, m);
+  abhi.sendTextWithMentions(m.chat, teks, m);
 }
 break;
 
 case 'listgc': {
-  let anu = await store.chats.all().filter(v => v.id.endsWith('@g.us')).map(v => v.id);
-  let teks = `⬣ *LIST GROUP CHAT*\n\nTotal Groups: ${anu.length} Groups\n\n`;
-  for (let i of anu) {
-    let metadata = await gss.groupMetadata(i);
+  let abhi = await store.chats.all().filter(v => v.id.endsWith('@g.us')).map(v => v.id);
+  let teks = `⬣ *LIST GROUP CHAT*\n\nTotal Groups: ${abhi.length} Groups\n\n`;
+  for (let i of abhi) {
+    let metadata = await abhi.groupMetadata(i);
     teks += `⬡ *Name:* ${metadata.subject}\n⬡ *Owner:* ${metadata.owner !== undefined ? '@' + metadata.owner.split`@`[0] : 'Unknown'}\n⬡ *ID:* ${metadata.id}\n⬡ *Created:* ${moment(metadata.creation * 1000).tz('Asia/Jakarta').format('DD/MM/YYYY HH:mm:ss')}\n⬡ *Members:* ${metadata.participants.length}\n\n────────────────────────\n\n`;
   }
-  gss.sendTextWithMentions(m.chat, teks, m);
+  abhi.sendTextWithMentions(m.chat, teks, m);
 }
 break;
 
 case 'listonline': case 'liston': {
   let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat;
   let online = [...Object.keys(store.presences[id]), botNumber];
-  gss.sendText(m.chat, 'List Online:\n\n' + online.map(v => '⭔ @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online });
+  abhi.sendText(m.chat, 'List Online:\n\n' + online.map(v => '⭔ @' + v.replace(/@.+/, '')).join`\n`, m, { mentions: online });
 }
 break;
 
@@ -963,7 +963,7 @@ case 'remini': case 'upscale': case 'enhance': case 'hd': {
         let proses = await remini(media, "enhance");
 
         // Send the enhanced image with the new caption
-        gss.sendMessage(m.chat, { image: proses, caption: `${mess.success} enhanced by gss botwa` }, { quoted: m });
+        abhi.sendMessage(m.chat, { image: proses, caption: `${mess.success} enhanced by abhi botwa` }, { quoted: m });
     } catch (error) {
         console.error('Error in Remini enhancement:', error);
         m.reply(`An error occurred: ${error.message}`);
@@ -993,9 +993,9 @@ case 'tomp4': case 'tovideo': {
   if (!/webp/.test(mime)) throw `Reply sticker with caption *${prefix + command}*`;
   m.reply(mess.wait);
   let { webp2mp4File } = require('./lib/uploader');
-  let media = await gss.downloadAndSaveMediaMessage(qmsg);
+  let media = await abhi.downloadAndSaveMediaMessage(qmsg);
   let webpToMp4 = await webp2mp4File(media);
-  await gss.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' } }, { quoted: m });
+  await abhi.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' } }, { quoted: m });
   await fs.unlinkSync(media);
 }
 break;
@@ -1003,30 +1003,30 @@ break;
 case 'toaud': case 'toaudio': {
   if (!/video/.test(mime) && !/audio/.test(mime)) throw `Send/Reply with Video/Audio to convert into Audio with caption ${prefix + command}`;
   m.reply(mess.wait);
-  let media = await gss.downloadMediaMessage(qmsg);
+  let media = await abhi.downloadMediaMessage(qmsg);
   let { toAudio } = require('./lib/converter');
   let audio = await toAudio(media, 'mp4');
-  gss.sendMessage(m.chat, { audio: audio, mimetype: 'audio/mpeg' }, { quoted: m });
+  abhi.sendMessage(m.chat, { audio: audio, mimetype: 'audio/mpeg' }, { quoted: m });
 }
 break;
 
             case 'tomp3': {
   if (!/video/.test(mime) && !/audio/.test(mime)) throw `Send/Reply with Video/Audio to convert into MP3 with caption ${prefix + command}`;
   m.reply(mess.wait);
-  let media = await gss.downloadMediaMessage(qmsg);
+  let media = await abhi.downloadMediaMessage(qmsg);
   let { toAudio } = require('./lib/converter');
   let audio = await toAudio(media, 'mp4');
-  gss.sendMessage(m.chat, { document: audio, mimetype: 'audio/mpeg', fileName: `Converted By ${gss.user.name}.mp3` }, { quoted: m });
+  abhi.sendMessage(m.chat, { document: audio, mimetype: 'audio/mpeg', fileName: `Converted By ${abhi.user.name}.mp3` }, { quoted: m });
 }
 break;
 
 case 'tovn': case 'toptt': {
   if (!/video/.test(mime) && !/audio/.test(mime)) throw `Reply with Video/Audio to convert into VN with caption ${prefix + command}`;
   m.reply(mess.wait);
-  let media = await gss.downloadMediaMessage(qmsg);
+  let media = await abhi.downloadMediaMessage(qmsg);
   let { toPTT } = require('./lib/converter');
   let audio = await toPTT(media, 'mp4');
-  gss.sendMessage(m.chat, { audio: audio, mimetype: 'audio/mpeg', ptt: true }, { quoted: m });
+  abhi.sendMessage(m.chat, { audio: audio, mimetype: 'audio/mpeg', ptt: true }, { quoted: m });
 }
 break;
 
@@ -1034,9 +1034,9 @@ case 'togif': {
   if (!/webp/.test(mime)) throw `Reply sticker with caption *${prefix + command}*`;
   m.reply(mess.wait);
   let { webp2mp4File } = require('./lib/uploader');
-  let media = await gss.downloadAndSaveMediaMessage(qmsg);
+  let media = await abhi.downloadAndSaveMediaMessage(qmsg);
   let webpToMp4 = await webp2mp4File(media);
-  await gss.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' }, gifPlayback: true }, { quoted: m });
+  await abhi.sendMessage(m.chat, { video: { url: webpToMp4.result, caption: 'Convert Webp To Video' }, gifPlayback: true }, { quoted: m });
   await fs.unlinkSync(media);
 }
 break;
@@ -1044,13 +1044,13 @@ break;
 case 'tourl': {
   m.reply(mess.wait);
   let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader');
-  let media = await gss.downloadAndSaveMediaMessage(qmsg);
+  let media = await abhi.downloadAndSaveMediaMessage(qmsg);
   if (/image/.test(mime)) {
-    let anu = await TelegraPh(media);
-    m.reply(util.format(anu));
+    let abhi = await TelegraPh(media);
+    m.reply(util.format(abhi));
   } else if (!/image/.test(mime)) {
-    let anu = await UploadFileUgu(media);
-    m.reply(util.format(anu));
+    let abhi = await UploadFileUgu(media);
+    m.reply(util.format(abhi));
   }
   await fs.unlinkSync(media);
 }
@@ -1063,7 +1063,7 @@ break;
   let apirnobg = ['q61faXzzR5zNU6cvcrwtUkRU', 'S258diZhcuFJooAtHTaPEn4T', '5LjfCVAp4vVNYiTjq9mXJWHF', 'aT7ibfUsGSwFyjaPZ9eoJc61', 'BY63t7Vx2tS68YZFY6AJ4HHF', '5Gdq1sSWSeyZzPMHqz7ENfi8', '86h6d6u4AXrst4BVMD9dzdGZ', 'xp8pSDavAgfE5XScqXo9UKHF', 'dWbCoCb3TacCP93imNEcPxcL'];
   let apinobg = apirnobg[Math.floor(Math.random() * apirnobg.length)];
   hmm = await './src/remobg-' + getRandom('');
-  localFile = await gss.downloadAndSaveMediaMessage(qmsg, hmm);
+  localFile = await abhi.downloadAndSaveMediaMessage(qmsg, hmm);
   outputFile = await './src/hremo-' + getRandom('.png');
   m.reply(mess.wait);
   remobg.removeBackgroundFromImageFile({
@@ -1074,7 +1074,7 @@ break;
     scale: "100%",
     outputFile
   }).then(async result => {
-    gss.sendMessage(m.chat, { image: fs.readFileSync(outputFile), caption: mess.success }, { quoted: m });
+    abhi.sendMessage(m.chat, { image: fs.readFileSync(outputFile), caption: mess.success }, { quoted: m });
     await fs.unlinkSync(localFile);
     await fs.unlinkSync(outputFile);
   });
@@ -1102,10 +1102,10 @@ case 'ytsearch': {
                 // Create a new poll with options for video and audio
                 pollOptions.push(`Video: ${search.video.title || 'Title not available'}`);
                 pollOptions.push(`Audio: ${search.video.description || 'Description not available'}`);
-                let newPollMessage = await gss.sendPoll(m.chat, 'Select an option:', pollOptions, { quoted: m });
+                let newPollMessage = await abhi.sendPoll(m.chat, 'Select an option:', pollOptions, { quoted: m });
 
                 // Extract selected option from the poll response
-                let selectedOption = await gss.getMessage(newPollMessage.chat, newPollMessage.id);
+                let selectedOption = await abhi.getMessage(newPollMessage.chat, newPollMessage.id);
                 
                 // Extract details and create a new poll with a dynamic command
                 if (selectedOption && selectedOption.message && selectedOption.message.text) {
@@ -1123,7 +1123,7 @@ case 'ytsearch': {
 
                     // Send a new poll with the dynamic command
                     let newPollOptions = [`Details: ${selectedDetails}`, newCommandText];
-                    await gss.sendPoll(m.chat, 'Select an option:', newPollOptions, { quoted: m });
+                    await abhi.sendPoll(m.chat, 'Select an option:', newPollOptions, { quoted: m });
                 } else {
                     throw 'Error extracting selected option details.';
                 }
@@ -1142,7 +1142,7 @@ case 'ytsearch': {
         pollOptions = search.all.slice(0, 10).map(i => `play ${i.title}`);
 
         // Send the initial poll
-        let pollMessage = await gss.sendPoll(m.chat, 'Select a video:', pollOptions, { quoted: m });
+        let pollMessage = await abhi.sendPoll(m.chat, 'Select a video:', pollOptions, { quoted: m });
     }
 }
 break;
@@ -1155,15 +1155,15 @@ case 'ytplay': {
    m.reply(mess.wait);
     let yts = require("yt-search");
     let search = await yts(text);
-    let anu = search.videos[Math.floor(Math.random() * search.videos.length)];
+    let abhi = search.videos[Math.floor(Math.random() * search.videos.length)];
 
     // Limiting description to two lines
-    let limitedDescription = anu.description.split('\n').slice(0, 2).join('\n');
+    let limitedDescription = abhi.description.split('\n').slice(0, 2).join('\n');
 
     let caption = `
 here is your search result`;
 
-    gss.sendPoll(m.chat, caption, [`*audio* ${anu.title}`, `*video* ${anu.title}`]);
+    abhi.sendPoll(m.chat, caption, [`*audio* ${abhi.title}`, `*video* ${abhi.title}`]);
   } catch (error) {
     console.error('Error:', error);
   }
@@ -1186,7 +1186,7 @@ case '*audio*':
   let vidAudio = searchAudio.videos[Math.floor(Math.random() * searchAudio.videos.length)];
   if (!vidAudio) throw 'Video Not Found, Try Another Title';
   let { title: titleAudio, thumbnail: thumbnailAudio, timestamp: timestampAudio, views: viewsAudio, ago: agoAudio, url: urlAudio } = vidAudio;
-  let wmAudio = 'Audio downloaded by Gss_botwa';
+  let wmAudio = 'Audio downloaded by abhi_botwa';
 
 
 
@@ -1202,7 +1202,7 @@ case '*audio*':
 
   let thumbnailDataAudio;
   try {
-    const thumbnailResponseAudio = await gss.getFile(thumbnailAudio);
+    const thumbnailResponseAudio = await abhi.getFile(thumbnailAudio);
     thumbnailDataAudio = thumbnailResponseAudio.data;
   } catch (error) {
     console.error('Error fetching thumbnail:', error);
@@ -1228,7 +1228,7 @@ case '*audio*':
     },
   };
 
-  await gss.sendMessage(m.chat, docAudio, { quoted: m });
+  await abhi.sendMessage(m.chat, docAudio, { quoted: m });
 
   fs.unlink(`${tmpDirAudio}/${titleAudio}.mp3`, (err) => {
     if (err) {
@@ -1253,7 +1253,7 @@ case 'vid':
   let vidVideo = searchVideo.videos[Math.floor(Math.random() * searchVideo.videos.length)];
   if (!vidVideo) throw 'Video Not Found, Try Another Title';
   let { title: titleVideo, thumbnail: thumbnailVideo, timestamp: timestampVideo, views: viewsVideo, ago: agoVideo, url: urlVideo } = vidVideo;
-  let wmVideo = 'video downloaded by Gss_botwa';
+  let wmVideo = 'video downloaded by test';
 
   const videoStream = ytdl(urlVideo, {
     filter: 'videoandaudio',
@@ -1267,7 +1267,7 @@ case 'vid':
 
   let thumbnailDataVideo;
   try {
-    const thumbnailResponseVideo = await gss.getFile(thumbnailVideo);
+    const thumbnailResponseVideo = await abhi.getFile(thumbnailVideo);
     thumbnailDataVideo = thumbnailResponseVideo.data;
   } catch (error) {
     console.error('Error fetching thumbnail:', error);
@@ -1293,7 +1293,7 @@ case 'vid':
     },
   };
 
-  await gss.sendMessage(m.chat, docVideo, { quoted: m });
+  await abhi.sendMessage(m.chat, docVideo, { quoted: m });
 
   fs.unlink(`${tmpDirVideo}/${titleVideo}.mp4`, (err) => {
     if (err) {
@@ -1347,7 +1347,7 @@ async function downloadAndMergeVideo(url, outputFileName) {
         console.error('Error:', error.message || error);
         throw error;
     } finally {
-        // Cleanup temporary files
+        // Cleabhip temporary files
         fs.unlinkSync('tempVideo.mp4');
         fs.unlinkSync('tempAudio.mp3');
     }
@@ -1364,14 +1364,14 @@ case 'ytv': {
 
         await downloadAndMergeVideo(videoUrl, outputFileName);
 
-        // Send the video using gss.sendMessage
-        gss.sendMessage(m.chat, {
+        // Send the video using abhi.sendMessage
+        abhi.sendMessage(m.chat, {
             video: {
                 url: outputFileName,
                 mimetype: 'video/mp4',
                 filename: 'Downloaded Video'
             },
-            caption: 'Video download by gss botwa'
+            caption: 'Video download by abhi botwa'
         }, { quoted: m });
 
         // Respond back to the user or do further processing if needed
@@ -1447,7 +1447,7 @@ case 'instagram':
      m.reply(mess.wait);
     try {
         const videoUrl = await downloadInstagramVideo(apiKeys, url);
-        await gss.sendMessage(m.chat, { video: { url: videoUrl }, caption: 'Downloaded by gss botwa' }, { quoted: m });
+        await abhi.sendMessage(m.chat, { video: { url: videoUrl }, caption: 'Downloaded by abhi botwa' }, { quoted: m });
     } catch (error) {
         if (error.message.includes('Video URL not found')) {
             return m.reply('The Instagram video could not be found.');
@@ -1513,11 +1513,11 @@ case '*download_app*':
         await downloadApk(apiKeys[0], packageName, outputPath);
 
         // Send the APK file as a document using sendMessage
-        await gss.sendMessage(m.chat, {
+        await abhi.sendMessage(m.chat, {
             document: fs.readFileSync(outputPath),
             mimetype: 'application/vnd.android.package-archive',
             fileName: `${packageName}.apk`, // Use packageName in the fileName
-            caption: 'Downloaded by gss botwa'
+            caption: 'Downloaded by abhi botwa'
         }, { quoted: m });
 
         // Optionally, you can delete the temporary file
@@ -1586,7 +1586,7 @@ async function getAppPackageInfo(appName) {
 
         // Send a poll with package names and instructions
         const pollMessage = `Select an option for ${appName}:\n\nInstructions:\nTo download, choose the second option.`;
-        await gss.sendPoll(m.chat, pollMessage, options);
+        await abhi.sendPoll(m.chat, pollMessage, options);
       } else {
         m.reply(`Could not find package names for ${appName}.`);
       }
@@ -1625,7 +1625,7 @@ case 'mediafire': {
         }
 
         // Prepare result message with available information and added spaces
-        const resultMessage = `*gss mediafire downloader*
+        const resultMessage = `*abhi mediafire downloader*
 
 *✪ Name* : ${fileInfo[0].nama}
 *✪ Size* : ${fileInfo[0].size}
@@ -1637,7 +1637,7 @@ case 'mediafire': {
         m.reply(`${resultMessage}`);
 
         // Send the file to the user with a caption
-        gss.sendMessage(
+        abhi.sendMessage(
             m.chat,
             {
                 document: {
@@ -1645,7 +1645,7 @@ case 'mediafire': {
                 },
                 fileName: fileInfo[0].nama,
                 mimetype: fileInfo[0].mime,
-                caption: `Downloaded by gss botwa: ${fileInfo[0].nama}`,  // Add your desired caption
+                caption: `Downloaded by abhi botwa: ${fileInfo[0].nama}`,  // Add your desired caption
             },
             { quoted: m }
         );
@@ -1685,7 +1685,7 @@ case 'fb': case 'fbdl': case 'facebook': {
         fs.writeFileSync(`./${randomName}`, videoBuffer);
 
         // Send the video using client.sendMessage
-        await gss.sendMessage(
+        await abhi.sendMessage(
             m.chat,
             {
                 video: fs.readFileSync(`./${randomName}`),
@@ -1721,7 +1721,7 @@ await m.reply(`Please wait...`);
 ▢ *🏝️Posts:* ${res.postsH}
 ▢ *🔗 Link* : https://instagram.com/${res.username.replace(/^@/, '')}
 └────────────`
-     await gss.sendMessage(m.chat, {image: { url: res.profilePic }, caption: te }, {quoted: m})
+     await abhi.sendMessage(m.chat, {image: { url: res.profilePic }, caption: te }, {quoted: m})
       } catch {
         m.reply(`Make sure the username comes from *Instagram*`)
       }
@@ -1729,14 +1729,14 @@ await m.reply(`Please wait...`);
 break;
 
  case 'gitclone':
-  if (!args[0]) return m.reply(`Where is the link?\nExample :\n${prefix}${command} https://github.com/sid238/Gss_Botwa`)
+  if (!args[0]) return m.reply(`Where is the link?\nExample :\n${prefix}${command} https://github.com/sid238/abhi_Botwa`)
   if (!isUrl(args[0]) && !args[0].includes('github.com')) return m.reply(`Link invalid!!`)
   let regex1 = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
   let [, user, repo] = args[0].match(regex1) || []
   repo = repo.replace(/.git$/, '')
   let gitUrl = `https://api.github.com/repos/${user}/${repo}/zipball`
   let filename = (await fetch(gitUrl, {method: 'HEAD'})).headers.get('content-disposition').match(/attachment; filename=(.*)/)[1]
-  gss.sendMessage(m.chat, { document: { url: gitUrl }, fileName: filename+'.zip', mimetype: 'application/zip' }, { quoted: m }).catch((err) => reply(mess.error))
+  abhi.sendMessage(m.chat, { document: { url: gitUrl }, fileName: filename+'.zip', mimetype: 'application/zip' }, { quoted: m }).catch((err) => reply(mess.error))
   break;
 
 case 'google': {
@@ -1766,7 +1766,7 @@ case 'gimage': {
 🤠 *Query* : ${text}
 🔗 *Media Url* : ${images}`,
     };
-    gss.sendMessage(m.chat, Message, { quoted: m });
+    abhi.sendMessage(m.chat, Message, { quoted: m });
   });
 }
 break;
@@ -1777,14 +1777,14 @@ break;
 case 'sticker': case 's': case 'stickergif': case 'sgif': {
   if (/image/.test(mime)) {
     m.reply(mess.wait);
-    let media = await gss.downloadMediaMessage(qmsg);
-    let encmedia = await gss.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author });
+    let media = await abhi.downloadMediaMessage(qmsg);
+    let encmedia = await abhi.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author });
     await fs.unlinkSync(encmedia);
   } else if (/video/.test(mime)) {
     m.reply(mess.wait);
     if (qmsg.seconds > 11) return m.reply('Maximum duration is 10 seconds!');
-    let media = await gss.downloadMediaMessage(qmsg);
-    let encmedia = await gss.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author });
+    let media = await abhi.downloadMediaMessage(qmsg);
+    let encmedia = await abhi.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author });
     await fs.unlinkSync(encmedia);
   } else {
     m.reply(`Send/reply with an image/video/gif with caption ${prefix + command}\nVideo/Gif duration 1-9 seconds`);
@@ -1795,44 +1795,44 @@ break;
 case 'pinterest': {
   m.reply(mess.wait);
   let { pinterest } = require('./lib/scraper');
-  anu = await pinterest(text);
-  result = anu[Math.floor(Math.random() * anu.length)];
-  gss.sendMessage(m.chat, { image: { url: result }, caption: '⭔ Media Url : ' + result }, { quoted: m });
+  abhi = await pinterest(text);
+  result = abhi[Math.floor(Math.random() * abhi.length)];
+  abhi.sendMessage(m.chat, { image: { url: result }, caption: '⭔ Media Url : ' + result }, { quoted: m });
 }
 break;
 
 case 'wallpaper': {
   if (!text) throw 'Enter Query Title';
   let { wallpaper } = require('./lib/scraper');
-  anu = await wallpaper(text);
-  result = anu[Math.floor(Math.random() * anu.length)];
+  abhi = await wallpaper(text);
+  result = abhi[Math.floor(Math.random() * abhi.length)];
   let Message = {
     image: { url: result.image[0] },
     caption: `⭔ Title : ${result.title}\n⭔ Category : ${result.type}\n⭔ Detail : ${result.source}\n⭔ Media Url : ${result.image[2] || result.image[1] || result.image[0]}`,
   };
-  gss.sendMessage(m.chat, Message, { quoted: m });
+  abhi.sendMessage(m.chat, Message, { quoted: m });
 }
 break;
 
 case 'wikimedia': {
   if (!text) throw 'Enter Query Title';
   let { wikimedia } = require('./lib/scraper');
-  anu = await wikimedia(text);
-  result = anu[Math.floor(Math.random() * anu.length)];
+  abhi = await wikimedia(text);
+  result = abhi[Math.floor(Math.random() * abhi.length)];
   let Message = {
     image: { url: result.image },
     caption: `⭔ Title : ${result.title}\n⭔ Source : ${result.source}\n⭔ Media Url : ${result.image}`,
   };
-  gss.sendMessage(m.chat, Message, { quoted: m });
+  abhi.sendMessage(m.chat, Message, { quoted: m });
 }
 break;
 
         case 'ringtone': {
 		if (!text) throw `Example : ${prefix + command} black rover`
         let { ringtone } = require('./lib/scraper')
-		let anu = await ringtone(text)
-		let result = anu[Math.floor(Math.random() * anu.length)]
-		gss.sendMessage(m.chat, { audio: { url: result.audio }, fileName: result.title+'.mp3', mimetype: 'audio/mpeg' }, { quoted: m })
+		let abhi = await ringtone(text)
+		let result = abhi[Math.floor(Math.random() * abhi.length)]
+		abhi.sendMessage(m.chat, { audio: { url: result.audio }, fileName: result.title+'.mp3', mimetype: 'audio/mpeg' }, { quoted: m })
 	    }
 	    break
 	    
@@ -1842,13 +1842,13 @@ break;
 	    
 		     case 'public': {
                 if (!isCreator) throw mess.owner
-                gss.public = true
+                abhi.public = true
                 m.reply('mode changed in to public. now all user use me!')
             }
             break
             case 'self': {
                 if (!isCreator) throw mess.owner
-                gss.public = false
+                abhi.public = false
                 m.reply('mode changed in to private. now only owner can use me!')
             }
             break
@@ -1859,18 +1859,18 @@ break;
                 key: m.key
             }
         }
-        await gss.sendMessage(m.chat, reactionMessage);
+        await abhi.sendMessage(m.chat, reactionMessage);
         const successReactionMessage = {
             react: {
                 text: "📌",
                 key: m.key
             }
         }
-        await gss.sendMessage(m.chat, successReactionMessage); 
+        await abhi.sendMessage(m.chat, successReactionMessage); 
   const startTime = new Date();
-  const pingMsg = await gss.sendMessage(m.chat, { text: 'cheking...' });
+  const pingMsg = await abhi.sendMessage(m.chat, { text: 'cheking...' });
 
- await gss.relayMessage(m.chat, {
+ await abhi.relayMessage(m.chat, {
       protocolMessage: {
         key: pingMsg.key,
         type: 14,
@@ -1883,7 +1883,7 @@ break;
 break;
             
             case 'owner': case 'creator': {
-                gss.sendContact(m.chat, global.owner, m)
+                abhi.sendContact(m.chat, global.owner, m)
             }
             break
 
@@ -1896,13 +1896,13 @@ if (!isAdmins) return m.reply('Tʜɪs ꜰᴇᴀᴛᴜʀᴇ ɪs ᴏɴʟʏ ꜰᴏ�
     let who
     if (m.isGroup) who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted.sender
     else who = m.quoted.sender ? m.quoted.sender : m.sender
-    let bio = await gss.fetchStatus(who)
+    let bio = await abhi.fetchStatus(who)
     m.reply(bio.status)
   } catch {
     if (text) throw `bio is private!`
     else try {
       let who = m.quoted ? m.quoted.sender : m.sender
-      let bio = await gss.fetchStatus(who)
+      let bio = await abhi.fetchStatus(who)
       m.reply(bio.status)
     } catch {
       throw `bio is private!`
@@ -1933,7 +1933,7 @@ case 'report': {
     const teks2 = `\n\n*Hi ${pushname}, your request has been forwarded to my Owners.*\n*Please wait...*`;
 
     // Send the message to the first owner in the `owner` array
-    gss.sendMessage(devlopernumber + "@s.whatsapp.net", {
+    abhi.sendMessage(devlopernumber + "@s.whatsapp.net", {
         text: textt + teks1,
         mentions: [m.sender],
     }, {
@@ -1960,7 +1960,7 @@ if (!isCreator) throw mess.owner
     process.env.AUTO_READ = 'false';
     m.reply('*Auto Read turned off.*');
   } else {
-    gss.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} on`, `${command.charAt(0).toUpperCase() + command.slice(1)} off`]);
+    abhi.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} on`, `${command.charAt(0).toUpperCase() + command.slice(1)} off`]);
   }
   break;
 
@@ -1976,7 +1976,7 @@ if (!isCreator) throw mess.owner
     process.env.ALWAYS_ONLINE = 'false';
     m.reply('Always Online turned off.');
   } else {
-    gss.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} on`, `${command.charAt(0).toUpperCase() + command.slice(1)} off`]);
+    abhi.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} on`, `${command.charAt(0).toUpperCase() + command.slice(1)} off`]);
   }
   break;
 
@@ -1992,7 +1992,7 @@ if (!isCreator) throw mess.owner
     process.env.AUTO_TYPING = 'false';
     m.reply('*AUTO TYPING turned off.*');
   } else {
-    gss.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} on`, `${command.charAt(0).toUpperCase() + command.slice(1)} off`]);
+    abhi.sendPoll(m.chat, "Please Choose, I Hope You're Happy!", [`${command.charAt(0).toUpperCase() + command.slice(1)} on`, `${command.charAt(0).toUpperCase() + command.slice(1)} off`]);
   }
   break;
   
@@ -2001,7 +2001,7 @@ case 'gcsetting':
 if (!m.isGroup) return m.reply('ʏᴏᴜ ᴄᴀɴ ᴜsᴇ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ɪɴ ɢʀᴏᴜᴘ ❌')
 if (!isAdmins) return m.reply('Tʜɪs ꜰᴇᴀᴛᴜʀᴇ ɪs ᴏɴʟʏ ꜰᴏʀ ɢʀᴏᴜᴘ ᴀᴅᴍɪɴs')
     const options = ['group close', 'group open', 'revoke', 'mute', 'leave', 'editinfo', 'tagall','antilink', 'linkgc'];
-    gss.sendPoll(m.chat, 'Select your preferences:', options);
+    abhi.sendPoll(m.chat, 'Select your preferences:', options);
     break;
 
 
@@ -2027,7 +2027,7 @@ if (!isCreator) throw mess.owner
       'Anticall off',
     ];
 
-    gss.sendPoll(m.chat, 'Select your preferences:', options);
+    abhi.sendPoll(m.chat, 'Select your preferences:', options);
   }, 2000);
   break;
 
@@ -2064,7 +2064,7 @@ case 'gtts': {
     });
 
     // Send the audio message
-    return gss.sendMessage(m.chat, {
+    return abhi.sendMessage(m.chat, {
         audio: {
             url: audioUrl,
         },
@@ -2124,7 +2124,7 @@ case 'poll': {
             for (let i of opt.split(',')) {
                 options.push(i)
             }
-            await gss.sendMessage(m.chat, {
+            await abhi.sendMessage(m.chat, {
                 poll: {
                     name: poll,
                     values: options
@@ -2144,7 +2144,7 @@ case 'resetgclink':
 case 'resetgruplink': {
   if (!m.isGroup) return m.reply('ʏᴏᴜ ᴄᴀɴ ᴜsᴇ ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ɪɴ ɢʀᴏᴜᴘ ❌');
     if (!isAdmins) return m.reply('Tʜɪs ғᴇᴀᴛᴜʀᴇ ɪs ᴏɴʟʏ ғᴏʀ ɢʀᴏᴜᴘ ᴀᴅᴍɪɴ, ᴏᴡɴᴇʀ ᴀɴᴅ ʙᴏᴛᴀᴅᴍɪɴ, ʏᴏᴜ ᴄᴀɴɴᴏᴛ ᴜsᴇ ɪᴛ.')
-gss.groupRevokeInvite(m.chat)
+abhi.groupRevokeInvite(m.chat)
 await m.reply('group link reset ')
 }
 break
@@ -2154,7 +2154,7 @@ case 'gdrive':
   try {
     let res = await fg.GDriveDl(args[0]);
     await m.reply(` *Google Drive DL* ▢ *Number:* ${res.fileName} ▢ *Size:* ${res.fileSize} ▢ *type:* ${res.mimetype}`);
-    gss.sendMessage(m.chat, { document: { url: res.downloadUrl }, fileName: res.fileName, mimetype: res.mimetype }, { quoted: m });
+    abhi.sendMessage(m.chat, { document: { url: res.downloadUrl }, fileName: res.fileName, mimetype: res.mimetype }, { quoted: m });
   } catch {
     m.reply('Eʀʀᴏʀ: Cʜᴇᴄᴋ ᴛʜᴇ ʟɪɴᴋ ᴏʀ ᴛʀʏ ᴀɴᴏᴛʜᴇʀ ʟɪɴᴋ');
   }
@@ -2189,7 +2189,7 @@ function convertToFontStyle(text, style) {
         // Check if the user provided arguments for text and style
         if (args.length === 0) {
             const availableStylesPreview = availableStyles.map(style => {
-                const previewText = convertToFontStyle("gss botwa", parseInt(style));
+                const previewText = convertToFontStyle("abhi botwa", parseInt(style));
                 return `${style}: ${previewText}`;
             }).join('\n');
 
@@ -2218,14 +2218,14 @@ case 'alive': {
                 key: m.key
             }
         }
-        await gss.sendMessage(m.chat, reactionMessage);
+        await abhi.sendMessage(m.chat, reactionMessage);
         const successReactionMessage = {
             react: {
                 text: "👀", 
                 key: m.key
             }
         }
-        await gss.sendMessage(m.chat, successReactionMessage);
+        await abhi.sendMessage(m.chat, successReactionMessage);
   await m.reply(uptimeMessage);
 }
 break;
@@ -2235,8 +2235,8 @@ case "sc":
         case "script":
         case "scbot":
         case "repo":
-           //m.reply("https://github.com/sid238/Gss_Botwa");
-          let api = "https://api.github.com/repos/gssbotwa/Gssbotwa2";
+           //m.reply("https://github.com/sid238/abhi_Botwa");
+          let api = "https://api.github.com/repos/abhibotwa/abhibotwa2";
           axios.get(api).then(function (response) {
             github = response.data;
             let txt = `  *B O T  -  S C R I P T*\n\n`;
@@ -2248,8 +2248,8 @@ case "sc":
             )}\n`;
             txt += `◦  *Url* : ${github.html_url}\n\n`;
             txt += `${github.forks_count} Forks · ${github.stargazers_count} Stars · ${github.open_issues_count} Issues\n\n`;
-            txt += "*Gss_Botwa*";
-            gss.relayMessage(
+            txt += "*abhi_Botwa*";
+            abhi.relayMessage(
               m.chat,
               {
                 requestPaymentMessage: {
@@ -2277,7 +2277,7 @@ case "sc":
           
 case 'tempmail':
     const option = ['mail 1','mail 3','mail 5'];
-    gss.sendPoll(m.chat, 'Select your mail:', option);
+    abhi.sendPoll(m.chat, 'Select your mail:', option);
     break;
 
           
@@ -2369,11 +2369,11 @@ case 'calcular':
 case 'calculadora':
   try {
     let id = m.chat;
-    gss.math = gss.math ? gss.math : {};
+    abhi.math = abhi.math ? abhi.math : {};
 
-    if (id in gss.math) {
-      clearTimeout(gss.math[id][3]);
-      delete gss.math[id];
+    if (id in abhi.math) {
+      clearTimeout(abhi.math[id][3]);
+      delete abhi.math[id];
       return m.reply('...');
     }
 
@@ -2421,8 +2421,8 @@ case 'nowa':
     for (let i = 0; i < total; i++) {
         let list = [...i.toString().padStart(random, '0')];
         let result = text.replace(regex, () => list.shift()) + '@s.whatsapp.net';
-        if (await gss.onWhatsApp(result).then(v => (v[0] || {}).exists)) {
-            let info = await gss.fetchStatus(result).catch(_ => {});
+        if (await abhi.onWhatsApp(result).then(v => (v[0] || {}).exists)) {
+            let info = await abhi.fetchStatus(result).catch(_ => {});
             array.push({ exists: true, jid: result, ...info });
         } else {
             array.push({ exists: false, jid: result });
@@ -2489,7 +2489,7 @@ case 'githubstalk': {
     }
 
     // Send the message with the updated caption and user's avatar
-    await gss.sendMessage(m.chat, { image: { url: userData.avatar_url }, caption: responseMessage }, { quoted: m });
+    await abhi.sendMessage(m.chat, { image: { url: userData.avatar_url }, caption: responseMessage }, { quoted: m });
 
     // Add a success reaction message
     const successReactionMessage = {
@@ -2498,10 +2498,10 @@ case 'githubstalk': {
         key: m.key
       }
     };
-    await gss.sendMessage(m.chat, successReactionMessage);
+    await abhi.sendMessage(m.chat, successReactionMessage);
   } catch (error) {
     console.error('Error fetching GitHub data:', error);
-    await gss.sendMessage(m.chat, 'An error occurred while fetching GitHub data.', { quoted: m });
+    await abhi.sendMessage(m.chat, 'An error occurred while fetching GitHub data.', { quoted: m });
   }
   break;
 }
@@ -2512,9 +2512,9 @@ case 'emojimix': {
   let [emoji1, emoji2] = text.split`+`;
   if (!emoji1) throw `Example: ${prefix + command} 😅+🤔`;
   if (!emoji2) throw `Example: ${prefix + command} 😅+🤔`;
-  let anu = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`);
-  for (let res of anu.results) {
-    let encmedia = await gss.sendImageAsSticker(m.chat, res.url, m, { packname: global.packname, author: global.author, categories: res.tags });
+  let abhi = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`);
+  for (let res of abhi.results) {
+    let encmedia = await abhi.sendImageAsSticker(m.chat, res.url, m, { packname: global.packname, author: global.author, categories: res.tags });
     await fs.unlinkSync(encmedia);
   }
 }
@@ -2537,13 +2537,13 @@ case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat':
                 if (/tupai/.test(command)) set = '-filter:a "atempo=0.5,asetrate=65100"'
                 if (/audio/.test(mime)) {
                 m.reply(mess.wait)
-                let media = await gss.downloadAndSaveMediaMessage(qmsg)
+                let media = await abhi.downloadAndSaveMediaMessage(qmsg)
                 let ran = getRandom('.mp3')
                 exec(`ffmpeg -i ${media} ${set} ${ran}`, (err, stderr, stdout) => {
                 fs.unlinkSync(media)
                 if (err) return m.reply(err)
                 let buff = fs.readFileSync(ran)
-                gss.sendMessage(m.chat, { audio: buff, mimetype: 'audio/mpeg' }, { quoted : m })
+                abhi.sendMessage(m.chat, { audio: buff, mimetype: 'audio/mpeg' }, { quoted : m })
                 fs.unlinkSync(ran)
                 })
                 } else m.reply(`Reply to the audio you want to change with a caption *${prefix + command}*`)
@@ -2554,7 +2554,7 @@ case 'bass': case 'blown': case 'deep': case 'earrape': case 'fast': case 'fat':
                 
             
             case 'menu': case 'help': case 'list': case 'listmenu': {
-                gss.sendPoll(m.chat, "List Menu",['Allmenu','Groupmenu','Downloadmenu','Searchmenu','Funmenu','Toolmenu','Convertmenu','aimenu','Mainmenu','Ownermenu'])
+                abhi.sendPoll(m.chat, "List Menu",['Allmenu','Groupmenu','Downloadmenu','Searchmenu','Funmenu','Toolmenu','Convertmenu','aimenu','Mainmenu','Ownermenu'])
             }
             break
           // Assuming you have a getRandomSymbol function to generate a random symbol
@@ -2583,7 +2583,7 @@ case 'allmenu': {
     };
      
      
-    let introText = `Hello ${pushname}!👋\nI'm *𝐆𝐒𝐒_𝚩𝚯𝚻𝐖𝚫*, your WhatsAppchatbot programmed to be your virtual assistant on WhatsApp.\n\n •sᴛᴀᴛᴜs:Public\n • ʟᴀɴɢᴜᴀɢᴇ: Node.js\n • ʙᴀɪʟᴇʏ: @adivvashing\n • ʙᴀɪʟᴇʏsᴜᴘᴘᴏʀᴛ:@whiskeysockets\n • ʙᴏᴛ ɴᴀᴍᴇ: ${botname}\n  •ᴅᴇᴠʟᴏᴘᴇʀ:${devlopernumber}\n\n\n`;
+    let introText = `Hello ${pushname}!👋\nI'M *${botname}*,•Owner:${devlopernumber}\n\n\n`;
 
     let menuText = ''; // Initialize menuText here
 
@@ -2595,8 +2595,8 @@ case 'allmenu': {
     menuText += '─────✪';
 
     // Assuming there's a sendImage function that takes the chat, image path, and caption
-    const imagePath = './gss.jpg'; // Replace with the actual image path
-    gss.sendImage(m.chat, imagePath, introText + menuText);
+    const imagePath = './abhi.jpg'; // Replace with the actual image path
+    abhi.sendImage(m.chat, imagePath, introText + menuText);
 }
 break;
 
@@ -2608,105 +2608,105 @@ break;
 case 'grupmenu':
 case 'groupmenu': {
     const randomSymbol = getRandomSymbol();
-    let anu = `✪━ 乂 *group Menu* 乂 ━✪
+    let abhi = `✪━ 乂 *group Menu* 乂 ━✪
 │
 ${cmdGrup.sort((a, b) => a.localeCompare(b)).map((v, i) => `│ ${randomSymbol} ${prefix}`+ v).join('\n')}
 │
 ╰──────✪`;
-    gss.sendPoll(m.chat, anu, ['Owner', 'Ping']);
+    abhi.sendPoll(m.chat, abhi, ['Owner', 'Ping']);
 }
 break;
             case 'downloadmenu': case 'dlmenu': case 'downmenu': {
               const randomSymbol = getRandomSymbol();
-                let anu = `✪━ 乂 *Downloader Menu* 乂 ━✪
+                let abhi = `✪━ 乂 *Downloader Menu* 乂 ━✪
 │
 ${cmdDown.sort((a, b) => a.localeCompare(b)).map((v, i) => `│  ${randomSymbol} ${prefix}`+ v).join('\n')}
 │
 └───────✪`
-                gss.sendPoll(m.chat, anu, ['Owner','Ping'])
+                abhi.sendPoll(m.chat, abhi, ['Owner','Ping'])
             }
             break 
             case 'searchmenu': {
               const randomSymbol = getRandomSymbol();
-                let anu = `✪━乂*Search Menu*乂 ━✪
+                let abhi = `✪━乂*Search Menu*乂 ━✪
 │
 ${cmdSearch.sort((a, b) => a.localeCompare(b)).map((v, i) => `│ ${randomSymbol} ${prefix}`+ v).join('\n')}
 │
 └───────✪`
-                gss.sendPoll(m.chat, anu, ['Owner','Ping'])
+                abhi.sendPoll(m.chat, abhi, ['Owner','Ping'])
             }
             break
             
             
             case 'funmenu': {
               const randomSymbol = getRandomSymbol();
-                let anu = `✪━ 乂 *Fun Menu* 乂 ━✪
+                let abhi = `✪━ 乂 *Fun Menu* 乂 ━✪
 │
 ${cmdFun.sort((a, b) => a.localeCompare(b)).map((v, i) => `│ ${randomSymbol} ${prefix}`+ v).join('\n')}
 │
 └───────✪`
-                gss.sendPoll(m.chat, anu, ['Owner','Ping'])
+                abhi.sendPoll(m.chat, abhi, ['Owner','Ping'])
             }
             break 
             case 'convertmenu': {
               const randomSymbol = getRandomSymbol();
-               let anu = `✪━ 乂 *Convert Menu* 乂 ━✪
+               let abhi = `✪━ 乂 *Convert Menu* 乂 ━✪
 │
 ${cmdConv.sort((a, b) => a.localeCompare(b)).map((v, i) => `│ ${randomSymbol} ${prefix}`+ v).join('\n')}
 │
 └───────✪`
-                gss.sendPoll(m.chat, anu, ['Owner','Ping'])
+                abhi.sendPoll(m.chat, abhi, ['Owner','Ping'])
             }
             break 
             case 'mainmenu': {
               const randomSymbol = getRandomSymbol();
-                let anu = `✪━ 乂 *Main Menu* 乂 ━✪
+                let abhi = `✪━ 乂 *Main Menu* 乂 ━✪
 │
 ${cmdMain.sort((a, b) => a.localeCompare(b)).map((v, i) => `│ ${randomSymbol} ${prefix}`+ v).join('\n')}
 │
 └───────✪`
-                gss.sendPoll(m.chat, anu, ['Owner','Ping'])
+                abhi.sendPoll(m.chat, abhi, ['Owner','Ping'])
             }
             break 
             case 'ownermenu': {
               const randomSymbol = getRandomSymbol();
-                let anu = `✪━ 乂 *Owner Menu* 乂 ━✪
+                let abhi = `✪━ 乂 *Owner Menu* 乂 ━✪
 │
 ${cmdOwner.sort((a, b) => a.localeCompare(b)).map((v, i) => `│  ${randomSymbol} ${prefix}`+ v).join('\n')}
 │
 └───────✪`
-                gss.sendPoll(m.chat, anu, ['Owner','Ping'])
+                abhi.sendPoll(m.chat, abhi, ['Owner','Ping'])
             }
             break
 case 'aimenu': {
     const randomSymbol = getRandomSymbol();
-    let anu = `✪━乂 *Ai Menu* 乂 ━✪
+    let abhi = `✪━乂 *Ai Menu* 乂 ━✪
 │
 ${cmdAi.sort((a, b) => a.localeCompare(b)).map((v, i) => `│ ${randomSymbol} ${prefix}` + v).join('\n')}
 │
 └───────✪`;
-    gss.sendPoll(m.chat, anu, ['Owner', 'Ping']);
+    abhi.sendPoll(m.chat, abhi, ['Owner', 'Ping']);
 }
 break;
 
 case 'bugmenu': {
     const randomSymbol = getRandomSymbol();
-    let anu = `✪━ 乂 *Bug Menu* 乂 ━✪
+    let abhi = `✪━ 乂 *Bug Menu* 乂 ━✪
 │
 ${cmdBug.sort((a, b) => a.localeCompare(b)).map((v, i) => `│ ${randomSymbol} ${prefix}` + v).join('\n')}
 │
 └───────✪`;
-    gss.sendPoll(m.chat, anu, ['Owner', 'Ping']);
+    abhi.sendPoll(m.chat, abhi, ['Owner', 'Ping']);
 }
 break;
 case 'toolmenu': {
     const randomSymbol = getRandomSymbol();
-    let anu = `✪━ 乂 *Tool Menu* 乂 ━✪
+    let abhi = `✪━ 乂 *Tool Menu* 乂 ━✪
 │
 ${cmdTool.sort((a, b) => a.localeCompare(b)).map((v, i) => `│ ${randomSymbol} ${prefix}` + v).join('\n')}
 │
 └───────✪`;
-    gss.sendPoll(m.chat, anu, ['Owner', 'Ping']);
+    abhi.sendPoll(m.chat, abhi, ['Owner', 'Ping']);
 }
 break;
 
@@ -2771,7 +2771,7 @@ break;
 		    if (m.isBaileys) return
 		    let msgs = global.db.data.database
 		    if (!(budy.toLowerCase() in msgs)) return
-		    gss.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
+		    abhi.copyNForward(m.chat, msgs[budy.toLowerCase()], true)
 		}
         }
         
