@@ -1,6 +1,6 @@
 
 require('./config')
-const { default: gssConnect, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto, getAggregateVotesInPollMessage } = require("@whiskeysockets/baileys")
+const { default: abhiConnect, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto, getAggregateVotesInPollMessage } = require("@whiskeysockets/baileys")
 const pino = require('pino')
 const { Boom } = require('@hapi/boom')
 const fs = require('fs')
@@ -62,13 +62,13 @@ if (global.db) setInterval(async () => {
     if (global.db.data) await global.db.write()
   }, 30 * 1000)
 
-async function startgss() {
+async function startabhi() {
     const { state, saveCreds } = await useMultiFileAuthState(`./${sessionName}`)
 
-    const gss = gssConnect({
+    const abhi = abhiConnect({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
-        browser: ['gss botwa Multi Device','Safari','1.0.0'],
+        browser: ['abhi botwa Multi Device','Safari','1.0.0'],
         auth: state,
         getMessage: async (key) => {
             if (store) {
@@ -76,43 +76,43 @@ async function startgss() {
                 return msg.message || undefined
             }
             return {
-                conversation: "Hai Im gss botwa"
+                conversation: "Hai Im abhi botwa"
             }
         }
     })
 
-    store.bind(gss.ev)
+    store.bind(abhi.ev)
     
     // Anti Call
-    gss.ev.on('call', async (fatihh) => {
-    let botNumber = await gss.decodeJid(gss.user.id)
+    abhi.ev.on('call', async (fatihh) => {
+    let botNumber = await abhi.decodeJid(abhi.user.id)
     let ciko = db.data.settings[botNumber].anticall
     if (!ciko) return
     console.log(fatihh)
     for (let tihh of fatihh) {
     if (tihh.isGroup == false) {
     if (tihh.status == "offer") {
-    let pa7rick = await gss.sendTextWithMentions(tihh.from, `*${gss.user.name}* can't receive calls  ${tihh.isVideo ? `video` : `suara`}. Sorry @${tihh.from.split('@')[0]} you will be blocked. If by accident, please contact the owner to open it !`)
-    gss.sendContact(tihh.from, global.owner, pa7rick)
+    let pa7rick = await abhi.sendTextWithMentions(tihh.from, `*${abhi.user.name}* can't receive calls  ${tihh.isVideo ? `video` : `suara`}. Sorry @${tihh.from.split('@')[0]} you will be blocked. If by accident, please contact the owner to open it !`)
+    abhi.sendContact(tihh.from, global.owner, pa7rick)
     await sleep(8000)
-    await gss.updateBlockStatus(tihh.from, "block")
+    await abhi.updateBlockStatus(tihh.from, "block")
     }
     }
     }
     })
 
-    gss.ev.on('messages.upsert', async chatUpdate => {
+    abhi.ev.on('messages.upsert', async chatUpdate => {
         //console.log(JSON.stringify(chatUpdate, undefined, 2))
         try {
         mek = chatUpdate.messages[0]
         if (!mek.message) return
         mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message
         if (mek.key && mek.key.remoteJid === 'status@broadcast') return
-        if (!gss.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
+        if (!abhi.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
         if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
         if (mek.key.id.startsWith('FatihArridho_')) return
-        m = smsg(gss, mek, store)
-        require("./gss")(gss, m, chatUpdate, store)
+        m = smsg(abhi, mek, store)
+        require("./abhi")(abhi, m, chatUpdate, store)
         } catch (err) {
             console.log(err)
         }
@@ -125,10 +125,10 @@ async function startgss() {
             return msg?.message
         }
         return {
-            conversation: "Hai im gss botwa"
+            conversation: "Hai im abhi botwa"
         }
     }
-    gss.ev.on('messages.update', async chatUpdate => {
+    abhi.ev.on('messages.update', async chatUpdate => {
         for(const { key, update } of chatUpdate) {
 			if(update.pollUpdates && key.fromMe) {
 				const pollCreation = await getMessage(key)
@@ -140,34 +140,34 @@ async function startgss() {
 	                var toCmd = pollUpdate.filter(v => v.voters.length !== 0)[0]?.name
 	                if (toCmd == undefined) return
                     var prefCmd = prefix+toCmd
-	                gss.appenTextMessage(prefCmd, chatUpdate)
+	                abhi.appenTextMessage(prefCmd, chatUpdate)
 				}
 			}
 		}
     })
     
     // Group Update
-    gss.ev.on('groups.update', async pea => {
+    abhi.ev.on('groups.update', async pea => {
     //console.log(pea)
     try {
     for(let ciko of pea) {
     // Get Profile Picture Group
        try {
-       ppgc = await gss.profilePictureUrl(ciko.id, 'image')
+       ppgc = await abhi.profilePictureUrl(ciko.id, 'image')
        } catch {
        ppgc = 'https://tinyurl.com/yx93l6da'
        }
        let wm_fatih = { url : ppgc }
        if (ciko.announce == true) {
-       gss.send5ButImg(ciko.id, `「 Group Settings Change 」\n\nGroup has been closed by admin, Now only admin can send messages !`, `Group Settings Change Message`, wm_fatih, [])
+       abhi.send5ButImg(ciko.id, `「 Group Settings Change 」\n\nGroup has been closed by admin, Now only admin can send messages !`, `Group Settings Change Message`, wm_fatih, [])
        } else if (ciko.announce == false) {
-       gss.send5ButImg(ciko.id, `「 Group Settings Change 」\n\nGroup has been opened by admin, Now participants can send messages !`, `Group Settings Change Message`, wm_fatih, [])
+       abhi.send5ButImg(ciko.id, `「 Group Settings Change 」\n\nGroup has been opened by admin, Now participants can send messages !`, `Group Settings Change Message`, wm_fatih, [])
        } else if (ciko.restrict == true) {
-       gss.send5ButImg(ciko.id, `「 Group Settings Change 」\n\nGroup info has been restricted, Now only admin can edit group info !`, `Group Settings Change Message`, wm_fatih, [])
+       abhi.send5ButImg(ciko.id, `「 Group Settings Change 」\n\nGroup info has been restricted, Now only admin can edit group info !`, `Group Settings Change Message`, wm_fatih, [])
        } else if (ciko.restrict == false) {
-       gss.send5ButImg(ciko.id, `「 Group Settings Change 」\n\nGroup info has been opened, Now participants can edit group info !`, `Group Settings Change Message`, wm_fatih, [])
+       abhi.send5ButImg(ciko.id, `「 Group Settings Change 」\n\nGroup info has been opened, Now participants can edit group info !`, `Group Settings Change Message`, wm_fatih, [])
        } else {
-       gss.send5ButImg(ciko.id, `「 Group Settings Change 」\n\nGroup Subject telah diganti menjadi *${ciko.subject}*`, `Group Settings Change Message`, wm_fatih, [])
+       abhi.send5ButImg(ciko.id, `「 Group Settings Change 」\n\nGroup Subject telah diganti menjadi *${ciko.subject}*`, `Group Settings Change Message`, wm_fatih, [])
      }
     }
     } catch (err){
@@ -175,34 +175,34 @@ async function startgss() {
     }
     })
 
-    gss.ev.on('group-participants.update', async (anu) => {
+    abhi.ev.on('group-participants.update', async (anu) => {
         console.log(anu)
         try {
-            let metadata = await gss.groupMetadata(anu.id)
+            let metadata = await abhi.groupMetadata(anu.id)
             let participants = anu.participants
             for (let num of participants) {
                 // Get Profile Picture User
                 try {
-                    ppuser = await gss.profilePictureUrl(num, 'image')
+                    ppuser = await abhi.profilePictureUrl(num, 'image')
                 } catch {
                     ppuser = 'https://tinyurl.com/yx93l6da'
                 }
 
                 // Get Profile Picture Group
                 try {
-                    ppgroup = await gss.profilePictureUrl(anu.id, 'image')
+                    ppgroup = await abhi.profilePictureUrl(anu.id, 'image')
                 } catch {
                     ppgroup = 'https://tinyurl.com/yx93l6da'
                 }
 
                 if (anu.action == 'add') {
-                    gss.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `Welcome To ${metadata.subject} @${num.split("@")[0]}` })
+                    abhi.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `Welcome To ${metadata.subject} @${num.split("@")[0]}` })
                 } else if (anu.action == 'remove') {
-                    gss.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
+                    abhi.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `@${num.split("@")[0]} Leaving To ${metadata.subject}` })
                 } else if (anu.action == 'promote') {
-                    gss.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `@${num.split('@')[0]} Promote From ${metadata.subject}` })
+                    abhi.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `@${num.split('@')[0]} Promote From ${metadata.subject}` })
                 } else if (anu.action == 'demote') {
-                    gss.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `@${num.split('@')[0]} Demote From ${metadata.subject}` })
+                    abhi.sendMessage(anu.id, { image: { url: ppuser }, mentions: [num], caption: `@${num.split('@')[0]} Demote From ${metadata.subject}` })
               }
             }
         } catch (err) {
@@ -211,7 +211,7 @@ async function startgss() {
     })
 	
     // Setting
-    gss.decodeJid = (jid) => {
+    abhi.decodeJid = (jid) => {
         if (!jid) return jid
         if (/:\d+@/gi.test(jid)) {
             let decode = jidDecode(jid) || {}
@@ -219,64 +219,64 @@ async function startgss() {
         } else return jid
     }
     
-    gss.ev.on('contacts.update', update => {
+    abhi.ev.on('contacts.update', update => {
         for (let contact of update) {
-            let id = gss.decodeJid(contact.id)
+            let id = abhi.decodeJid(contact.id)
             if (store && store.contacts) store.contacts[id] = { id, name: contact.notify }
         }
     })
 
-    gss.getName = (jid, withoutContact  = false) => {
-        id = gss.decodeJid(jid)
-        withoutContact = gss.withoutContact || withoutContact 
+    abhi.getName = (jid, withoutContact  = false) => {
+        id = abhi.decodeJid(jid)
+        withoutContact = abhi.withoutContact || withoutContact 
         let v
         if (id.endsWith("@g.us")) return new Promise(async (resolve) => {
             v = store.contacts[id] || {}
-            if (!(v.name || v.subject)) v = gss.groupMetadata(id) || {}
+            if (!(v.name || v.subject)) v = abhi.groupMetadata(id) || {}
             resolve(v.name || v.subject || PhoneNumber('+' + id.replace('@s.whatsapp.net', '')).getNumber('international'))
         })
         else v = id === '0@s.whatsapp.net' ? {
             id,
             name: 'WhatsApp'
-        } : id === gss.decodeJid(gss.user.id) ?
-            gss.user :
+        } : id === abhi.decodeJid(abhi.user.id) ?
+            abhi.user :
             (store.contacts[id] || {})
             return (withoutContact ? '' : v.name) || v.subject || v.verifiedName || PhoneNumber('+' + jid.replace('@s.whatsapp.net', '')).getNumber('international')
     }
     
-    gss.sendContact = async (jid, kon, quoted = '', opts = {}) => {
+    abhi.sendContact = async (jid, kon, quoted = '', opts = {}) => {
 	let list = []
 	for (let i of kon) {
 	    list.push({
-	    	displayName: await gss.getName(i + '@s.whatsapp.net'),
-	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await gss.getName(i + '@s.whatsapp.net')}\nFN:${await gss.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:bsid4961@gmail.com\nitem2.X-ABLabel:Email\nEND:VCARD`
+	    	displayName: await abhi.getName(i + '@s.whatsapp.net'),
+	    	vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await abhi.getName(i + '@s.whatsapp.net')}\nFN:${await abhi.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:bsid4961@gmail.com\nitem2.X-ABLabel:Email\nEND:VCARD`
 	    })
 	}
-	gss.sendMessage(jid, { contacts: { displayName: `${list.length} Kontak`, contacts: list }, ...opts }, { quoted })
+	abhi.sendMessage(jid, { contacts: { displayName: `${list.length} Kontak`, contacts: list }, ...opts }, { quoted })
     }
     
-    gss.public = true
+    abhi.public = true
 
-    gss.serializeM = (m) => smsg(gss, m, store)
+    abhi.serializeM = (m) => smsg(abhi, m, store)
 
-    gss.ev.on('connection.update', async (update) => {
+    abhi.ev.on('connection.update', async (update) => {
         const { connection, lastDisconnect } = update	    
         if (connection === 'close') {
         let reason = new Boom(lastDisconnect?.error)?.output.statusCode
-            if (reason === DisconnectReason.badSession) { console.log(`Bad Session File, Please Delete Session and Scan Again`); gss.logout(); }
-            else if (reason === DisconnectReason.connectionClosed) { console.log("Connection closed, reconnecting...."); startgss(); }
-            else if (reason === DisconnectReason.connectionLost) { console.log("Connection Lost from Server, reconnecting..."); startgss(); }
-            else if (reason === DisconnectReason.connectionReplaced) { console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First"); gss.logout(); }
-            else if (reason === DisconnectReason.loggedOut) { console.log(`Device Logged Out, Please Scan Again And Run.`); gss.logout(); }
-            else if (reason === DisconnectReason.restartRequired) { console.log("Restart Required, Restarting..."); startgss(); }
-            else if (reason === DisconnectReason.timedOut) { console.log("Connection TimedOut, Reconnecting..."); startgss(); }
-            else if (reason === DisconnectReason.Multidevicemismatch) { console.log("Multi device mismatch, please scan again"); gss.logout(); }
-            else gss.end(`Unknown DisconnectReason: ${reason}|${connection}`)
+            if (reason === DisconnectReason.badSession) { console.log(`Bad Session File, Please Delete Session and Scan Again`); abhi.logout(); }
+            else if (reason === DisconnectReason.connectionClosed) { console.log("Connection closed, reconnecting...."); startabhi(); }
+            else if (reason === DisconnectReason.connectionLost) { console.log("Connection Lost from Server, reconnecting..."); startabhi(); }
+            else if (reason === DisconnectReason.connectionReplaced) { console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First"); abhi.logout(); }
+            else if (reason === DisconnectReason.loggedOut) { console.log(`Device Logged Out, Please Scan Again And Run.`); abhi.logout(); }
+            else if (reason === DisconnectReason.restartRequired) { console.log("Restart Required, Restarting..."); startabhi(); }
+            else if (reason === DisconnectReason.timedOut) { console.log("Connection TimedOut, Reconnecting..."); startabhi(); }
+            else if (reason === DisconnectReason.Multidevicemismatch) { console.log("Multi device mismatch, please scan again"); abhi.logout(); }
+            else abhi.end(`Unknown DisconnectReason: ${reason}|${connection}`)
         }
         console.log('Connected...', update)
     })
 
-    gss.ev.on('creds.update', saveCreds)
+    abhi.ev.on('creds.update', saveCreds)
 
     // Add Other
       
@@ -287,7 +287,7 @@ async function startgss() {
      * @param [*] values 
      * @returns 
      */
-    gss.sendPoll = (jid, name = '', values = [], selectableCount = 1) => { return gss.sendMessage(jid, { poll: { name, values, selectableCount }}) }
+    abhi.sendPoll = (jid, name = '', values = [], selectableCount = 1) => { return abhi.sendMessage(jid, { poll: { name, values, selectableCount }}) }
 
       /**
       *
@@ -297,25 +297,25 @@ async function startgss() {
       * @param {*} quoted
       * @param {*} options
       */
-     gss.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
+     abhi.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
       let mime = '';
       let res = await axios.head(url)
       mime = res.headers['content-type']
       if (mime.split("/")[1] === "gif") {
-     return gss.sendMessage(jid, { video: await getBuffer(url), caption: caption, gifPlayback: true, ...options}, { quoted: quoted, ...options})
+     return abhi.sendMessage(jid, { video: await getBuffer(url), caption: caption, gifPlayback: true, ...options}, { quoted: quoted, ...options})
       }
       let type = mime.split("/")[0]+"Message"
       if(mime === "application/pdf"){
-     return gss.sendMessage(jid, { document: await getBuffer(url), mimetype: 'application/pdf', caption: caption, ...options}, { quoted: quoted, ...options })
+     return abhi.sendMessage(jid, { document: await getBuffer(url), mimetype: 'application/pdf', caption: caption, ...options}, { quoted: quoted, ...options })
       }
       if(mime.split("/")[0] === "image"){
-     return gss.sendMessage(jid, { image: await getBuffer(url), caption: caption, ...options}, { quoted: quoted, ...options})
+     return abhi.sendMessage(jid, { image: await getBuffer(url), caption: caption, ...options}, { quoted: quoted, ...options})
       }
       if(mime.split("/")[0] === "video"){
-     return gss.sendMessage(jid, { video: await getBuffer(url), caption: caption, mimetype: 'video/mp4', ...options}, { quoted: quoted, ...options })
+     return abhi.sendMessage(jid, { video: await getBuffer(url), caption: caption, mimetype: 'video/mp4', ...options}, { quoted: quoted, ...options })
       }
       if(mime.split("/")[0] === "audio"){
-     return gss.sendMessage(jid, { audio: await getBuffer(url), caption: caption, mimetype: 'audio/mpeg', ...options}, { quoted: quoted, ...options })
+     return abhi.sendMessage(jid, { audio: await getBuffer(url), caption: caption, mimetype: 'audio/mpeg', ...options}, { quoted: quoted, ...options })
       }
       }
     
@@ -327,7 +327,7 @@ async function startgss() {
      * @param {*} options 
      * @returns 
      */
-    gss.sendText = (jid, text, quoted = '', options) => gss.sendMessage(jid, { text: text, ...options }, { quoted, ...options })
+    abhi.sendText = (jid, text, quoted = '', options) => abhi.sendMessage(jid, { text: text, ...options }, { quoted, ...options })
 
     /**
      * 
@@ -338,9 +338,9 @@ async function startgss() {
      * @param {*} options 
      * @returns 
      */
-    gss.sendImage = async (jid, path, caption = '', quoted = '', options) => {
+    abhi.sendImage = async (jid, path, caption = '', quoted = '', options) => {
 	let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
-        return await gss.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted })
+        return await abhi.sendMessage(jid, { image: buffer, caption: caption, ...options }, { quoted })
     }
 
     /**
@@ -352,9 +352,9 @@ async function startgss() {
      * @param {*} options 
      * @returns 
      */
-    gss.sendVideo = async (jid, path, caption = '', quoted = '', gif = false, options) => {
+    abhi.sendVideo = async (jid, path, caption = '', quoted = '', gif = false, options) => {
         let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
-        return await gss.sendMessage(jid, { video: buffer, caption: caption, gifPlayback: gif, ...options }, { quoted })
+        return await abhi.sendMessage(jid, { video: buffer, caption: caption, gifPlayback: gif, ...options }, { quoted })
     }
 
     /**
@@ -366,9 +366,9 @@ async function startgss() {
      * @param {*} options 
      * @returns 
      */
-    gss.sendAudio = async (jid, path, quoted = '', ptt = false, options) => {
+    abhi.sendAudio = async (jid, path, quoted = '', ptt = false, options) => {
         let buffer = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
-        return await gss.sendMessage(jid, { audio: buffer, ptt: ptt, ...options }, { quoted })
+        return await abhi.sendMessage(jid, { audio: buffer, ptt: ptt, ...options }, { quoted })
     }
 
     /**
@@ -379,7 +379,7 @@ async function startgss() {
      * @param {*} options 
      * @returns 
      */
-    gss.sendTextWithMentions = async (jid, text, quoted, options = {}) => gss.sendMessage(jid, { text: text, mentions: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net'), ...options }, { quoted })
+    abhi.sendTextWithMentions = async (jid, text, quoted, options = {}) => abhi.sendMessage(jid, { text: text, mentions: [...text.matchAll(/@(\d{0,16})/g)].map(v => v[1] + '@s.whatsapp.net'), ...options }, { quoted })
 
     /**
      * 
@@ -389,7 +389,7 @@ async function startgss() {
      * @param {*} options 
      * @returns 
      */
-    gss.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
+    abhi.sendImageAsSticker = async (jid, path, quoted, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
         if (options && (options.packname || options.author)) {
@@ -398,7 +398,7 @@ async function startgss() {
             buffer = await imageToWebp(buff)
         }
 
-        await gss.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
+        await abhi.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
         return buffer
     }
 
@@ -410,7 +410,7 @@ async function startgss() {
      * @param {*} options 
      * @returns 
      */
-    gss.sendVideoAsSticker = async (jid, path, quoted, options = {}) => {
+    abhi.sendVideoAsSticker = async (jid, path, quoted, options = {}) => {
         let buff = Buffer.isBuffer(path) ? path : /^data:.*?\/.*?;base64,/i.test(path) ? Buffer.from(path.split`,`[1], 'base64') : /^https?:\/\//.test(path) ? await (await getBuffer(path)) : fs.existsSync(path) ? fs.readFileSync(path) : Buffer.alloc(0)
         let buffer
         if (options && (options.packname || options.author)) {
@@ -419,7 +419,7 @@ async function startgss() {
             buffer = await videoToWebp(buff)
         }
 
-        await gss.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
+        await abhi.sendMessage(jid, { sticker: { url: buffer }, ...options }, { quoted })
         return buffer
     }
 	
@@ -430,7 +430,7 @@ async function startgss() {
      * @param {*} attachExtension 
      * @returns 
      */
-    gss.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
+    abhi.downloadAndSaveMediaMessage = async (message, filename, attachExtension = true) => {
         let quoted = message.msg ? message.msg : message
         let mime = (message.msg || message).mimetype || ''
         let messageType = message.mtype ? message.mtype.replace(/Message/gi, '') : mime.split('/')[0]
@@ -446,7 +446,7 @@ async function startgss() {
         return trueFileName
     }
 
-    gss.downloadMediaMessage = async (message) => {
+    abhi.downloadMediaMessage = async (message) => {
         let mime = (message.msg || message).mimetype || ''
         let messageType = message.mtype ? message.mtype.replace(/Message/gi, '') : mime.split('/')[0]
         const stream = await downloadContentFromMessage(message, messageType)
@@ -468,8 +468,8 @@ async function startgss() {
      * @param {*} options 
      * @returns 
      */
-    gss.sendMedia = async (jid, path, fileName = '', caption = '', quoted = '', options = {}) => {
-        let types = await gss.getFile(path, true)
+    abhi.sendMedia = async (jid, path, fileName = '', caption = '', quoted = '', options = {}) => {
+        let types = await abhi.getFile(path, true)
            let { mime, ext, res, data, filename } = types
            if (res && res.status !== 200 || file.length <= 65536) {
                try { throw { json: JSON.parse(file.toString()) } }
@@ -489,7 +489,7 @@ async function startgss() {
        else if (/video/.test(mime)) type = 'video'
        else if (/audio/.test(mime)) type = 'audio'
        else type = 'document'
-       await gss.sendMessage(jid, { [type]: { url: pathFile }, caption, mimetype, fileName, ...options }, { quoted, ...options })
+       await abhi.sendMessage(jid, { [type]: { url: pathFile }, caption, mimetype, fileName, ...options }, { quoted, ...options })
        return fs.promises.unlink(pathFile)
        }
 
@@ -501,7 +501,7 @@ async function startgss() {
      * @param {*} options 
      * @returns 
      */
-    gss.copyNForward = async (jid, message, forceForward = false, options = {}) => {
+    abhi.copyNForward = async (jid, message, forceForward = false, options = {}) => {
         let vtype
 		if (options.readViewOnce) {
 			message.message = message.message && message.message.ephemeralMessage && message.message.ephemeralMessage.message ? message.message.ephemeralMessage.message : (message.message || undefined)
@@ -532,11 +532,11 @@ async function startgss() {
                 }
             } : {})
         } : {})
-        await gss.relayMessage(jid, waMessage.message, { messageId:  waMessage.key.id })
+        await abhi.relayMessage(jid, waMessage.message, { messageId:  waMessage.key.id })
         return waMessage
     }
 
-    gss.cMod = (jid, copy, text = '', sender = gss.user.id, options = {}) => {
+    abhi.cMod = (jid, copy, text = '', sender = abhi.user.id, options = {}) => {
         //let copy = message.toJSON()
 		let mtype = Object.keys(copy.message)[0]
 		let isEphemeral = mtype === 'ephemeralMessage'
@@ -557,7 +557,7 @@ async function startgss() {
 		if (copy.key.remoteJid.includes('@s.whatsapp.net')) sender = sender || copy.key.remoteJid
 		else if (copy.key.remoteJid.includes('@broadcast')) sender = sender || copy.key.remoteJid
 		copy.key.remoteJid = jid
-		copy.key.fromMe = sender === gss.user.id
+		copy.key.fromMe = sender === abhi.user.id
 
         return proto.WebMessageInfo.fromObject(copy)
     }
@@ -568,7 +568,7 @@ async function startgss() {
      * @param {*} path 
      * @returns 
      */
-    gss.getFile = async (PATH, save) => {
+    abhi.getFile = async (PATH, save) => {
         let res
         let data = Buffer.isBuffer(PATH) ? PATH : /^data:.*?\/.*?;base64,/i.test(PATH) ? Buffer.from(PATH.split`,`[1], 'base64') : /^https?:\/\//.test(PATH) ? await (res = await getBuffer(PATH)) : fs.existsSync(PATH) ? (filename = PATH, fs.readFileSync(PATH)) : typeof PATH === 'string' ? PATH : Buffer.alloc(0)
         //if (!Buffer.isBuffer(data)) throw new TypeError('Result is not a buffer')
@@ -588,10 +588,10 @@ async function startgss() {
 
     }
 
-    return gss
+    return abhi
 }
 
-startgss()
+startabhi()
 
 
 let file = require.resolve(__filename)
