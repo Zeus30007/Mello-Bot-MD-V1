@@ -110,7 +110,7 @@ SUPPORT GROUP: <a href="https://chat.whatsapp.com/EdSxYq8IblP2Iv5Vc0UBwd"><img a
 
 <p align="left">  
   <a href="https://youtube.com/@comedymelodych8468">
-    <img alt=NATHAN.from.𝐌𝐢𝐜𝐫𝐨𝐬𝐨𝐟𝐭.𝐭𝐞𝐜𝐡𝐧𝐢𝐜𝐚𝐥.𝐬𝐮𝐩𝐩𝐨𝐫𝐭.𝐔𝐒𝐀 height="150" src="https://telegra.ph/file/e6ce3079e271eff024c28.jpg">
+    <img alt=NATHAN.from.𝐌𝐢𝐜𝐫𝐨𝐬𝐨𝐟𝐭.𝐭𝐞𝐜𝐡𝐧𝐢𝐜𝐚𝐥.𝐬𝐮𝐩𝐩𝐨𝐫𝐭.𝐔𝐒𝐀 height="150" src="https://telegra.ph/file/ef4a32b77f2a22986d61d.jpg">
 
 </a> 
     
@@ -122,7 +122,7 @@ SUPPORT GROUP: <a href="https://chat.whatsapp.com/EdSxYq8IblP2Iv5Vc0UBwd"><img a
 
 <p align="left">  
   <a href="https://youtube.com/@comedymelodych8468">
-    <img alt=ALPHA.from.𝐌𝐢𝐜𝐫𝐨𝐬𝐨𝐟𝐭.𝐭𝐞𝐜𝐡𝐧𝐢𝐜𝐚𝐥.𝐬𝐮𝐩𝐩𝐨𝐫𝐭.𝐔𝐒𝐀 height="150" src="https://telegra.ph/file/3ce4dccf4b36e747c937b.jpg">
+    <img alt=ALPHA.from.𝐌𝐢𝐜𝐫𝐨𝐬𝐨𝐟𝐭.𝐭𝐞𝐜𝐡𝐧𝐢𝐜𝐚𝐥.𝐬𝐮𝐩𝐩𝐨𝐫𝐭.𝐔𝐒𝐀 height="150" src="https://telegra.ph/file/00659127047e9a3b4a640.jpg">
   
  </a> 
     
