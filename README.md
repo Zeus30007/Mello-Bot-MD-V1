@@ -95,10 +95,20 @@ SUPPORT GROUP: <a href="https://chat.whatsapp.com/EdSxYq8IblP2Iv5Vc0UBwd"><img a
 ## All thanks to ABHISHEK FOR THE CODE
 
 ### CONTRIBUTORS
-"MAIKI"><img src="https://telegra.ph/file/f70e0cb139e592f6cf91f.jpg" width="200" height="200" alt="MAIKI"/></a>
 
-"NATHAN"><img src="https://telegra.ph/file/e6ce3079e271eff024c28.jpg" width="200" height="200" alt="NATHAN"/></a>
+<p align="left">  
+  <a href="https://youtube.com/@comedymelodych8468">
+    <img alt=MAIKI.from.𝐌𝐢𝐜𝐫𝐨𝐬𝐨𝐟𝐭.𝐭𝐞𝐜𝐡𝐧𝐢𝐜𝐚𝐥.𝐬𝐮𝐩𝐩𝐨𝐫𝐭.𝐔𝐒𝐀 height="150" src="https://telegra.ph/file/f70e0cb139e592f6cf91f.jpg">
 
-"GIM"><img src="https://telegra.ph/file/8e88d4f3a40ec3d628abe.jpg" width="200" height="200" alt="GIM"/></a>
+<p align="left">  
+  <a href="https://youtube.com/@comedymelodych8468">
+    <img alt=NATHAN.from.𝐌𝐢𝐜𝐫𝐨𝐬𝐨𝐟𝐭.𝐭𝐞𝐜𝐡𝐧𝐢𝐜𝐚𝐥.𝐬𝐮𝐩𝐩𝐨𝐫𝐭.𝐔𝐒𝐀 height="150" src="https://telegra.ph/file/e6ce3079e271eff024c28.jpg">
 
-"ALPHA"><img src="https://telegra.ph/file/3ce4dccf4b36e747c937b.jpg" width="200" height="200" alt="ALPAH"/></a>
+<p align="left">  
+  <a href="https://youtube.com/@comedymelodych8468">
+    <img alt=ALPHA.from.𝐌𝐢𝐜𝐫𝐨𝐬𝐨𝐟𝐭.𝐭𝐞𝐜𝐡𝐧𝐢𝐜𝐚𝐥.𝐬𝐮𝐩𝐩𝐨𝐫𝐭.𝐔𝐒𝐀 height="150" src="https://telegra.ph/file/3ce4dccf4b36e747c937b.jpg">
+   
+<p align="left">  
+  <a href="https://youtube.com/@comedymelodych8468">
+    <img alt=GIM.from.𝐌𝐢𝐜𝐫𝐨𝐬𝐨𝐟𝐭.𝐭𝐞𝐜𝐡𝐧𝐢𝐜𝐚𝐥.𝐬𝐮𝐩𝐩𝐨𝐫𝐭.𝐔𝐒𝐀 height="150" src="https://telegra.ph/file/8e88d4f3a40ec3d628abe.jpg">
+   
