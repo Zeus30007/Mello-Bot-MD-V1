@@ -95,7 +95,10 @@ SUPPORT GROUP: <a href="https://chat.whatsapp.com/EdSxYq8IblP2Iv5Vc0UBwd"><img a
 ## All thanks to ABHISHEK FOR THE CODE
 
 ### CONTRIBUTORS
-<a href="MAIKI"><img src="https://telegra.ph/file/f70e0cb139e592f6cf91f.jpg" width="200" height="200" alt="MAIKI"/></a>
-<a href="NATHAN"><img src="https://telegra.ph/file/e6ce3079e271eff024c28.jpg" width="200" height="200" alt="NATHAN"/></a>
-<a href="GIM"><img src="https://telegra.ph/file/8e88d4f3a40ec3d628abe.jpg" width="200" height="200" alt="GIM"/></a>
-<a href="ALPHA"><img src="https://telegra.ph/file/3ce4dccf4b36e747c937b.jpg" width="200" height="200" alt="ALPAH"/></a>
+"MAIKI"><img src="https://telegra.ph/file/f70e0cb139e592f6cf91f.jpg" width="200" height="200" alt="MAIKI"/></a>
+
+"NATHAN"><img src="https://telegra.ph/file/e6ce3079e271eff024c28.jpg" width="200" height="200" alt="NATHAN"/></a>
+
+"GIM"><img src="https://telegra.ph/file/8e88d4f3a40ec3d628abe.jpg" width="200" height="200" alt="GIM"/></a>
+
+"ALPHA"><img src="https://telegra.ph/file/3ce4dccf4b36e747c937b.jpg" width="200" height="200" alt="ALPAH"/></a>
