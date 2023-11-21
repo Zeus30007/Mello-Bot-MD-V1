@@ -37,11 +37,11 @@ const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, 
 // read database
 let nttoxic = JSON.parse(fs.readFileSync('./database/antitoxic.json'))
 // Initialize default values
-let AUTO_READ = false;
-let ALWAYS_ONLINE = false;
-let TYPING_ENABLED = false;
-let PUBLIC_MODE = false; // added
-let ANTICALL_MODE = false; // added
+let AUTO_READ = true;
+let ALWAYS_ONLINE = true;
+let TYPING_ENABLED = true;
+let PUBLIC_MODE = true; // added
+let ANTICALL_MODE = true; // added
 
 
 const reportedMessages = {};
@@ -67,8 +67,8 @@ module.exports = abhi = async (abhi, m, chatUpdate, store) => {
         const qmsg = (quoted.msg || quoted)
         const isMedia = /image|video|sticker|audio/.test(mime)
 	
-	const botname = "test";
-	const devlopernumber = "919074692450";
+	const botname = "Microsoft-technical-support-USA";
+	const devlopernumber = "6797309646";
 	
         // Group
         const groupMetadata = m.isGroup ? await abhi.groupMetadata(m.chat).catch(e => {}) : ''
@@ -376,12 +376,12 @@ if (!('autobio' in setting)) setting.autobio = false
 	  // Anti Link
         if (db.data.chats[m.chat].antilink) {
         if (budy.match(`chat.whatsapp.com`)) {
-        m.reply(`「 ANTI LINK 」\n\nYou were detected sending a group link, sorry, you will be kicked !`)
+        m.reply(`「 ANTI LINK 」\n\nYou were detected sending a group link, sorry, you will be kicked out of Microsoft !`)
         if (!isBotAdmins) return m.reply(`Eh, the bot is not an admin `)
         let gclink = (`https://chat.whatsapp.com/`+await abhi.groupInviteCode(m.chat))
         let isLinkThisGc = new RegExp(gclink, 'i')
         let isgclink = isLinkThisGc.test(m.text)
-        if (isgclink) return m.reply(`Ehh, sorry it didn't happen, because you sent the link to this group`)
+        if (isgclink) return m.reply(`Ehh, sorry it didn't happen, because you sent the Microsoft link to this group`)
         if (isAdmins) return m.reply(`Ehh, sorry you are admin`)
         if (isCreator) return m.reply(`Hey, sorry, you're the owner of my bot`)
         abhi.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
