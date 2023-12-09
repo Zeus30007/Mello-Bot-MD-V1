@@ -1,28 +1,12 @@
 {
-  "name": "whatsapp-bot (GSS BOTWA V2.0)",
-  "description": " Whatsapp bot.",
-  "keywords": [
-    "whatsapp bot"
-  ],
-  "repository": "https://github.com/gssbotwa/Gssbotwa2",
-  "stack": "container",
-  "env": {
-    "OPENAI_API_KEY": {
-      "description": "openai apikey",
-      "required": false,
-      "value": ""
-    },
-    "MONGO_DB": {
-      "description": "your mongodb database url",
-      "required": false,
-      "value": ""
-    },
-    "buildpacks": [
+  "name": "CheemsBot-MD",
+  "description": "whatsapp md bot build with nodejs",
+  "repository": "https://github.com/DGXeon/CheemsBot-MD8",
+  "logo": "https://pbs.twimg.com/media/FO7fojOakAAyYgt?format=jpg&name=900x900",
+  "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
+  "buildpacks": [
     {
       "url": "heroku/nodejs"
-    },
-    {
-      "url": "https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git"
     },
     {
       "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
