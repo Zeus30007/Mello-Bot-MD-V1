@@ -489,7 +489,7 @@ async function sendzeusBotIncMessage(chatId, message, options = {}){
 
 //group chat msg by zeus
 const replygcxeon = (teks) => {
-zeus BotInc.sendMessage(m.chat,
+zeusBotInc.sendMessage(m.chat,
 { text: teks,
 contextInfo:{
 mentionedJid:[sender],
@@ -548,7 +548,7 @@ zeusBotInc.sendMessage(from, { audio: teks, mimetype: 'audio/mp4', ptt: true }, 
 for (let Bhosdikazeus of VoiceNotezeus) {
 if (budy === Bhosdikazeus) {
 let audiobuffy = fs.readFileSync(`./MaikiMedia/others/${Bhosdikamaiki}.mp3`)
-XeonBotInc.sendMessage(m.chat, { audio: audiobuffy, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
+zeusBotInc.sendMessage(m.chat, { audio: audiobuffy, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
 }
 }
 for (let Bhosdikazeus of Stickerzeus){
