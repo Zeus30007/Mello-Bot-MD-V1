@@ -1,7 +1,7 @@
 {
-  "name": "CheemsBot-MD",
+  "name": "Mello-Bot-MD-V1",
   "description": "whatsapp md bot build with nodejs",
-  "repository": "https://github.com/DGXeon/CheemsBot-MD8",
+  "repository": "https://github.com/Zeus30007/Mello-Bot-MD-V1",
   "logo": "https://pbs.twimg.com/media/FO7fojOakAAyYgt?format=jpg&name=900x900",
   "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
   "buildpacks": [

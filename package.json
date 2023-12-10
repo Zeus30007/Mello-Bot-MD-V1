@@ -1,6 +1,6 @@
 {
-  "name": "Cheems-Bot-MD",
-  "version": "8.0.0",
+  "name": "mello-Bot-MD",
+  "version": "1.0.0",
   "description": "Automated whatsapp md bot created using nodejs and baileys lib",
   "main": "index.js",
   "type": "commonjs",
@@ -10,7 +10,7 @@
   "keywords": [
     "termux",
     "whatsapp",
-    "2023",
+    "2024",
     "wabase-md",
     "base",
     "baileys-md",
@@ -18,7 +18,7 @@
     "bot-md",
     "multi-device"
   ],
-  "author": "DGXeon",
+  "author": "Maiki",
   "license": "ISC",
   "dependencies": {
     "@whiskeysockets/baileys": "^6.4.0",
@@ -93,10 +93,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DGXeon/CheemsBot-MD8.git"
+    "url": "git+https://github.com/Zeus30007/Mello-Bot-MD-V1.git"
   },
   "bugs": {
-    "url": "https://github.com/DGXeon/CheemsBot-MD8/issues"
+    "url": "https://github.com/Zeus30007/Mello-Bot-MD-V1/issues"
   },
-  "homepage": "https://github.com/DGXeon/CheemsBot-MD8/#readme"
+  "homepage": "https://github.com/Zeus30007/Mello-Bot-MD-V1/#readme"
 }
