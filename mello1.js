@@ -175,7 +175,7 @@ try {
                    
         //TIME
         const xtime = moment.tz('Australia/Fiji').format('HH:mm:ss')
-        const xdate = moment.tz('Australia/Fiji'').format('DD/MM/YYYY')
+        const xdate = moment.tz('Asia/Kolkata'').format('DD/MM/YYYY')
         const time2 = moment().tz('Asia/Kolkata').format('HH:mm:ss')  
          if(time2 < "23:59:00"){
 var Zeusytimewisher = `Good Night 🌌`
