@@ -52,7 +52,7 @@ Scan qr code from the above button, u can pay through GooglePay, Paytm, PhonePe 
 - FORK THE REPOSITORY [Here](https://github.com/Zeus30007/Mello-Bot-MD-V1/fork)
 
 ## `Scan QR Code For Session`
-[![MELLO BOT](https://repl.it/badge/github/quiec/whatsasena)]https://replit.com/@Zeus30007/MELLO-BOT-Auth-Session-Generator?v=1)
+- [![MELLO BOT](https://repl.it/badge/github/quiec/whatsasena)](https://replit.com/@Zeus30007/MELLO-BOT-Auth-Session-Generator?v=1)
 
 ## ` BUILDPACKS`
 
